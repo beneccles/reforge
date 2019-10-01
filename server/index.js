@@ -14,6 +14,11 @@ app.use(session({
     secret: SESSION_SECRET
 }))
 
+// Authenticate
+app.post('/auth/register', authCtrl.register)
+app.post('/auth/login', authCtrl.login)
+app.delete('/auth/logout', authCtrl.logout)
+
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
     app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} on station!`))
