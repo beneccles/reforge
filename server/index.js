@@ -3,6 +3,7 @@ const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
 const authCtrl = require('./controllers/authController')
+const postCtrl = require('./controllers/postController')
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env
 
 const app = express()
@@ -18,6 +19,10 @@ app.use(session({
 app.post('/auth/register', authCtrl.register)
 app.post('/auth/login', authCtrl.login)
 app.delete('/auth/logout', authCtrl.logout)
+
+// Add, show, and delete listings
+app.post('/api/newPost', postCtrl.createPost)
+
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
