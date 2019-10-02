@@ -1,0 +1,20 @@
+.Create {
+    border: 1px solid black;
+    height: 100vh;
+    width: 87vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.createForm {
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+    height: 50%;
+    width: 50%;
+}
