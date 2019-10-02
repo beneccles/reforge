@@ -33,5 +33,6 @@ CREATE TABLE posts (
     price int,
     title VARCHAR(100),
     spec_id int REFERENCES specs (spec_id),
-    author_id int REFERENCES users (user_id)
+    author_id int REFERENCES users (user_id),
+    condition text
 );
