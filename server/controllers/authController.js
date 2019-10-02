@@ -39,8 +39,8 @@ module.exports = {
         // If hashes don't match, send appropriate response
         if (!result) return res.status(200).send({ message: 'Incorrect password'})
         // If they do match, add user to sessions
-        const { name: username, id: userId, profile_pic } = user[0]
-        req.session.user = { username, userId, profile_pic }
+        const { name: username, user_id, profile_pic } = user[0]
+        req.session.user = { username, user_id, profile_pic }
         // Send session.user back to front end
         res.status(200).send({ message: 'Logged in', user: req.session.user, loggedIn: true})
     },

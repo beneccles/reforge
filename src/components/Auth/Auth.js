@@ -27,8 +27,8 @@ class Auth extends Component {
     login = async () => {
         const res = await axios.post('/auth/login', this.state)
         if (res.data.user) {
-            const { userId: id, profile_pic: profile, username: name } = res.data.user
-            const user = { id, profile, name }
+            const { userId: id, profile_pic: profile, username } = res.data.user
+            const user = { id, profile, username }
             this.props.updateUser(user)
             this.props.history.push('/dashboard')
             swal.fire({ type: 'success', text: res.data.message })
