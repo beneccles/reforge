@@ -22,6 +22,7 @@ app.delete('/auth/logout', authCtrl.logout)
 
 // Add, show, and delete listings
 app.post('/api/newPost', postCtrl.createPost)
+app.get('/api/posts', postCtrl.getPosts)
 
 
 massive(CONNECTION_STRING).then(db => {

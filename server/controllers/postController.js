@@ -13,5 +13,16 @@ module.exports = {
         })
 
 
+    },
+    async getPosts(req, res) {
+        const db = req.app.get('db')
+        const {offset} = req.query
+        const posts = await db.get_ten(offset)
+        console.log('Hit', offset, posts)
+        if (posts) {
+            res.status(200).send(posts)
+        } else {
+            res.sendStatus(204)
+        }
     }
 }
