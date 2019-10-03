@@ -24,5 +24,15 @@ module.exports = {
         } else {
             res.sendStatus(204)
         }
+    },
+    async singlePost(req, res) {
+        const db = req.app.get('db')
+        const {id} = req.query
+        const post = await db.single_post(id)
+        if (post) {
+            res.status(200).send(post)
+        } else {
+            res.sendStatus(204)
+        }
     }
 }

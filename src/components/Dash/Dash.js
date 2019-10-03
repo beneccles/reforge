@@ -21,17 +21,8 @@ class Dash extends Component {
   }
 
   getPosts = async () => {
-    // if (this.state.offset < 10) {
-    //   this.setState({offset: 0})
-    // }
-    // const res = await axios.get(`/api/posts?offset=${this.state.offset}`)
-    // if (res.data) {
-    //   console.log(res.data)
-    //  nextTen(res.data)
-    //  this.setState({offset: this.state.offset})
     this.props.nextTen(this.state.offset)
     this.props.postReturn()
-    // }
   }
 
   renderList = () => {
