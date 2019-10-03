@@ -26,7 +26,7 @@ export default class Create extends Component {
 
     handleSubmit = () => {
         axios.post('/api/newPost', this.state).then((res) => {
-            swal.fire({type: 'success', text: res.data.message})
+            swal.fire({ type: 'success', text: res.data.message })
             this.setState = {
                 title: "",
                 price: 0,
@@ -43,11 +43,18 @@ export default class Create extends Component {
 
     render() {
         return (
-            <div className="Create">
-                <div className="createForm">
-                    <input value={this.state.title} type="text" placeholder="Title" onChange={(e) => this.handleChange(e, 'title')}/>
-                    <input value={this.state.price} type="number" placeholder="Price" onChange={(e) => this.handleChange(e, 'price')} />
-                    <input value={this.state.conditon} type="text" placeholder="Condition" onChange={(e) => this.handleChange(e, 'condition')} />
+            <div className="formBody">
+                <div className="Create">
+                    <div id="formTitle">
+                        <h1>List a Computer</h1>
+                    </div>
+                    <div className="formHeader">
+                        <input id="title" value={this.state.title} type="text" placeholder="Title" onChange={(e) => this.handleChange(e, 'title')} />
+                        <input id="price" value={this.state.price} type="number" placeholder="Price" onChange={(e) => this.handleChange(e, 'price')} />
+                    </div>
+                    <div className="condition">
+                        <input id="condition" value={this.state.conditon} type="text" placeholder="Condition" onChange={(e) => this.handleChange(e, 'condition')} />
+                    </div>
                     <h2>Specifications</h2>
                     <select value={this.state.processor} name="Processor" id="processorMenu" onChange={(e) => this.handleChange(e, 'processor')}>
                         <option selected="selected">Processor...</option>
@@ -69,8 +76,8 @@ export default class Create extends Component {
                         <option value="Nvidia GTX 1660TI">Nvidia GTX 1660TI</option>
                         <option value="Nvidia GTX 1660">Nvidia GTX 1660</option>
                         <option value="AMD Radeon VII">AMD Radeon VII</option>
-                        <option value="AMD Radeon RX 5700">AMD Radeon RX 5700</option>
-                        <option value="AMD Radeon RX 5700 XT">AMD Radeon RX 5700 XT</option>
+                        <option value="AMD Radeon RX 5700">AMD Radeon RX-5700</option>
+                        <option value="AMD Radeon RX 5700 XT">AMD Radeon RX-5700-XT</option>
                     </select>
                     <select value={this.state.primaryStorage} name="Prime Storage" id="primaryStorage" onChange={(e) => this.handleChange(e, 'primaryStorage')}>
                         <option selected='selected'>Primary Storage...</option>
@@ -92,11 +99,14 @@ export default class Create extends Component {
                         <option value='1TB HDD'>1TB HDD</option>
                         <option value='2TB HDD'>2TB HDD</option>
                     </select>
-                    <button onClick={this.handleSubmit}>Submit</button>
-                    <button>Cancel</button>
-                </div>
 
+                </div>
+                <div className="formFooter">
+                    <button className="formButton" onClick={this.handleSubmit}>Submit</button>
+                    <button className="formButton">Cancel</button>
+                </div>
             </div>
+
         )
     }
 }

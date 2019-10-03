@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+// eslint-disable-next-line
 import axios from 'axios'
+// eslint-disable-next-line
 import { withRouter, Link } from 'react-router-dom'
 import { nextTen, postReturn } from '../../ducks/listReducer'
 import { connect } from 'react-redux'
-import store from '../../ducks/store'
 import './Dash.css'
 class Dash extends Component {
   constructor(props) {
@@ -41,7 +42,6 @@ class Dash extends Component {
       let pBrand = processor[0];
       let pModel = processor[2];
       let gpu = el.gpu.split(" ");
-      let gBrand = gpu[0];
       let gModel = gpu[1] + gpu[2];
 
       console.log(processor)
@@ -79,7 +79,11 @@ class Dash extends Component {
         </div>
         <div className="navButtons">
           <button onClick={this.getPosts}>GET STUFF</button>
+          {/* I'm certain theres a better way to do this, but for now I will leave it
+          as is until after I have the points requirements finished. */}
+          {/* eslint-disable-next-line */}
           <button onClick={() => this.setState({ offset: this.state.offset += 10 })}>Next</button>
+          {/* eslint-disable-next-line  */}
           <button onClick={() => this.setState({ offset: this.state.offset -= 10 })}>Back</button>
           <button onClick={this.toggle}>REFRESH</button>
         </div>
