@@ -1,7 +1,65 @@
 .Dash {
-    height: 100vh;
+	margin-top: 10vh;
+    height: 90vh;
     width: 100vw;
-    display: flex;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+}
+
+.list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 5px;
+}
+
+.postBoxSmall {
+	height: 15vh;
+	width: 45vw;
+	margin-bottom: 10px;
+	border: 1px solid black;
+	font-size: 12px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+}
+
+.microInfo{
+	transform: rotate(-45deg);
+	border: 1px solid blue;
+	margin-top: 5px;
+}
+
+.postHeader {
+	border: 1px solid green;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	width: 100%;
+}
+
+.postFooter {
+	border: 1px solid red;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: flex-end;
+	width: 100%;
+}
+
+.navButtons {
+	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: center;

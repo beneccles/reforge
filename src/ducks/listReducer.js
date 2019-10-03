@@ -25,12 +25,10 @@ export const postReturn = () => {
 
 const listReducer = (state = initialState, action) => {
     const {payload, type} = action
-    console.log(type, payload)
-    console.log(state)
     switch (type) {
         case NEXT_TEN + '_FULFILLED':
             return {
-                ...state, ...payload, loading: false
+                ...state, posts:[...payload], loading: false
             }
         case NEXT_TEN +'_PENDING':
             return {...state, loading: true}

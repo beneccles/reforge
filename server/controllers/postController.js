@@ -18,6 +18,7 @@ module.exports = {
         const db = req.app.get('db')
         const {offset} = req.query
         const posts = await db.get_ten(offset)
+        console.log(posts)
         if (posts) {
             res.status(200).send(posts)
         } else {
