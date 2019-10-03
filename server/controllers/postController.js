@@ -18,7 +18,6 @@ module.exports = {
         const db = req.app.get('db')
         const {offset} = req.query
         const posts = await db.get_ten(offset)
-        console.log(posts)
         if (posts) {
             res.status(200).send(posts)
         } else {
@@ -29,6 +28,7 @@ module.exports = {
         const db = req.app.get('db')
         const {id} = req.query
         const post = await db.single_post(id)
+        console.log(post)
         if (post) {
             res.status(200).send(post)
         } else {

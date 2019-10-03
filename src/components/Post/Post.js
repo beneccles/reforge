@@ -20,31 +20,33 @@ class Post extends Component {
         return (
             <div className="postBody">
                 <div className="post">
-                <div id="postTitle" className="formLeft">
-                    <h1>{post.title}</h1>
-                </div>
-                <div className="postImages">
-                    <div className="heroImage">
+                    <div id="postTitle" className="formLeft">
+                        <h1>{post.title}</h1>
+                    </div>
+                    <div className="postImages">
+                        <div className="heroImage">
 
+                        </div>
+                        <div className="showCase">
+                            <div id="showcase1">1</div>
+                            <div id="showcase2">2</div>
+                            <div id="showcase3">3</div>
+                            <div id="showcase4">4</div>
+                        </div>
                     </div>
-                    <div className="showCase">
-                        <div id="showcase1">1</div>
-                        <div id="showcase2">2</div>
-                        <div id="showcase3">3</div>
-                        <div id="showcase4">4</div>
+                    <div id="postTitle" className="formLeft">
+                        <h1>Specifications</h1>
                     </div>
-                </div>
-                <div id="postTitle" className="formLeft">
-                    <h1>Specifications</h1>
-                </div>
-                <p>{`" ${post.condition}"`}</p>
-                <div className="formLeft specs">
-                <p>{`Processor: ${post.processor}`}</p>
-                <p>{`Graphics Card: ${post.gpu}`}</p>
-                <p>{`Primary Storage: ${post.storage_prime}`}</p>
-                <p>{`Secondary Storage: ${post.storage_2nd}`}</p>
-                </div>
-                <button onClick={this.singlePost}>Get Post</button>
+                    <div className="formLeft specs">
+                        <p>{`Processor: ${post.processor}`}</p>
+                        <p>{`Graphics Card: ${post.gpu}`}</p>
+                        <p>{`Primary Storage: ${post.storage_prime}`}</p>
+                        <p>{`Secondary Storage: ${post.storage_2nd}`}</p>
+                    </div>
+                    <div className="condition">
+                        <p>{`" ${post.condition}"`}</p>
+                    </div>
+                    <button onClick={this.singlePost}>Get Post</button>
                 </div>
             </div>
         )
