@@ -17,6 +17,16 @@ class Nav extends Component {
         }
     }
 
+    componentDidMount(){
+        console.log(this.props)
+    }
+
+    logout = () => {
+        axios.delete('/auth/logout').then(() => {
+            console.log('SESSION CLOSED')
+        })
+    }
+
     render() {
         if (this.props.location.pathname !== '/' && this.props.location.pathname !== '/register') { // Only show the account control buttons if logged in. (in other words, if we are on the login screen, don't show these buttons)
             return (
@@ -25,7 +35,7 @@ class Nav extends Component {
                     <div className="upperNav">
                         <Link id="navDashTop" to="/dashboard"><img className="navImage" src={homeImg} alt="Home" /></Link>
                         <Link to="/new"><img className="navImage" src={post} alt="New Post" /></Link>
-                        <Link id="logoutButton" to="/"><img className="navImage" src={power} alt="Logout" /></Link>
+                        <Link id="logoutButton" to="/"><img className="navImage" onClick={this.logout} src={power} alt="Logout" /></Link>
                     </div>
                 </div>
             )

@@ -15,6 +15,11 @@ class Dash extends Component {
   }
 
   componentDidMount() {
+
+    if (!this.props.loggedIn) {
+      this.props.history.push("/")
+    }
+
     this.setState({ offset: 0 })
     this.props.nextTen(this.state.offset)
     this.props.postReturn()
@@ -28,14 +33,12 @@ class Dash extends Component {
   renderList = () => {
     console.log(this.props)
     const list = this.props.posts.map((el, index) => {
-      console.log(el)
       let processor = el.processor.split(" ");
       let pBrand = processor[0];
       let pModel = processor[2];
       let gpu = el.gpu.split(" ");
       let gModel = gpu[1] + gpu[2];
 
-      console.log(processor)
       return (
         <div className="postBoxSmall" key={index}>
           <div className="postHeader">
@@ -61,7 +64,6 @@ class Dash extends Component {
   }
 
   render() {
-    console.log(this.props.posts)
 
     return (
       <div className="Dash">
@@ -85,7 +87,8 @@ class Dash extends Component {
 
 function mapStateToProps(reduxState) {
   return {
-    posts: reduxState.listReducer.posts
+    posts: reduxState.listReducer.posts,
+    loggedIn: reduxState.reducer.loggedIn
   }
 }
 
