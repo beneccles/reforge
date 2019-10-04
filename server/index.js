@@ -28,6 +28,7 @@ app.get('/api/post', postCtrl.singlePost)
 
 // Twilio
 app.post('/api/sendSMS', smsCtrl.sendSMS)
+app.post('/sms',smsCtrl.recieveSMS)
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)

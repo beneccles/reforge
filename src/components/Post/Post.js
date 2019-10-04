@@ -15,6 +15,12 @@ class Post extends Component {
         console.log(this.state.post)
     }
 
+    sendSMS = () => {
+        const {author_id, title, price} = this.state.post
+        const message = title + ' for ' + price 
+        axios.post('/api/sendSMS', {name: 'Ben', message})
+    }
+
     render() {
         const { post } = this.state
         return (
@@ -47,6 +53,12 @@ class Post extends Component {
                     </div>
                     <div className="condition">
                         <p>{`" ${post.condition}"`}</p>
+                    </div>
+                    <div id="postTitle" className="formLeft">
+                        <h1>Contact Seller</h1>
+                    </div>
+                    <div className="formLeft">
+                        <button onClick={this.sendSMS}>Send Message</button>
                     </div>
                     <button onClick={this.singlePost}>Get Post</button>
                 </div>

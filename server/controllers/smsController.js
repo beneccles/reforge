@@ -9,7 +9,7 @@ module.exports = {
 
         client.messages
             .create({
-                body: name + ' sent: ' + message,
+                body: name + ' is interested in ' + message,
                 from: TWILIO_PHONE_NUMBER,
                 to: 17035894200
             })
@@ -20,5 +20,14 @@ module.exports = {
                 console.log(err)
                 res.sendStatus(500)
             })
+    },
+    recieveSMS: (req, res) => {
+        const MessageResponse = require('twilio').twiml.MessageResponse;
+        const twiml = new MessageResponse();
+
+        twiml.message('The Robots are coming! Head for the hills!');
+
+        res.writeHead(200, {'Content-Type': 'text/xml'});
+        res.end(twiml.toString())
     }
 }
