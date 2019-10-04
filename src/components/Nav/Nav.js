@@ -18,7 +18,9 @@ class Nav extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props)
+        if (!this.props.loggedIn) {
+            this.props.history.push('/')
+        }
     }
 
     logout = () => {
@@ -47,9 +49,10 @@ class Nav extends Component {
 
 function mapStateToProps(reduxState) {
     return {
-        username: reduxState.username,
-        id: reduxState.id,
-        profile: reduxState.profile
+        username: reduxState.reducer.username,
+        id: reduxState.reducer.id,
+        profile: reduxState.reducer.profile,
+        loggedIn: reduxState.reducer.loggedIn
     }
 }
 // In order for props.match or this.props.location to work, you need to include withRouter

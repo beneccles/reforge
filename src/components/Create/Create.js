@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
 import swal from 'sweetalert2'
 import './Create.css'
 
-export default class Create extends Component {
+class Create extends Component {
     constructor() {
         super()
 
         this.state = {
             title: "",
-            price: 0,
+            price:"",
             condition: "",
             processor: "",
             graphicsCard: "",
             primaryStorage: "",
             secondaryStorage: ""
+        }
+    }
+
+    componentDidMount(){
+        if (!this.props.loggedIn) {
+            this.props.history.push('/')
         }
     }
 
@@ -140,3 +147,11 @@ export default class Create extends Component {
         )
     }
 }
+
+function mapStateToProps(reduxState) {
+    return {
+        loggedIn: reduxState.reducer.loggedIn
+    }
+}
+
+export default connect(mapStateToProps)(Create)
