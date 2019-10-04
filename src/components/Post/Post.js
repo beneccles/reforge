@@ -25,7 +25,9 @@ class Post extends Component {
                     </div>
                     <div className="postImages">
                         <div className="heroImage">
-
+                            <div className="postPrice">
+                                 <p>{post.price}</p>
+                            </div>
                         </div>
                         <div className="showCase">
                             <div id="showcase1">1</div>

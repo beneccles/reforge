@@ -50,7 +50,37 @@ export default class Create extends Component {
                     </div>
                     <div className="formLeft">
                         <input id="title" value={this.state.title} type="text" placeholder="Title" onChange={(e) => this.handleChange(e, 'title')} />
-                        <input id="price" value={this.state.price} type="number" placeholder="Price" onChange={(e) => this.handleChange(e, 'price')} />
+                        <select value={this.state.price} name="price" id="priceMenu" onChange={(e) => this.handleChange(e, 'processor')}>
+                            <option selected="selected">Price...</option>
+                            <option value="$200">$200</option>
+                            <option value="$250">$250</option>
+                            <option value="$300">$300</option>
+                            <option value="$350">$350</option>
+                            <option value="$400">$400</option>
+                            <option value="$450">$450</option>
+                            <option value="$500">$500</option>
+                            <option value="$550">$550</option>
+                            <option value="$600">$600</option>
+                            <option value="$650">$650</option>
+                            <option value="$700">$700</option>
+                            <option value="$750">$750</option>
+                            <option value="$800">$800</option>
+                            <option value="$850">$850</option>
+                            <option value="$900">$900</option>
+                            <option value="$950">$950</option>
+                            <option value="$1000">$1000</option>
+                            <option value="$1100">$1100</option>
+                            <option value="$1200">$1200</option>
+                            <option value="$1300">$1300</option>
+                            <option value="$1400">$1400</option>
+                            <option value="$1500">$1500</option>
+                            <option value="$1600">$1600</option>
+                            <option value="$1700">$1700</option>
+                            <option value="$1800">$1800</option>
+                            <option value="$1900">$1900</option>
+                            <option value="$2000">$2000</option>
+                            <option value="$2500">$2500</option>
+                        </select>
                         <input id="condition" value={this.state.conditon} type="text" placeholder="Condition" onChange={(e) => this.handleChange(e, 'condition')} />
                     </div>
                     <h2 id="formTitle">Specifications</h2>

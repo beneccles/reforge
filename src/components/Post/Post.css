@@ -93,6 +93,10 @@
     font-size: 14px;
 }
 
+.postPrice {
+    transform: rotate(-45deg)
+}
+
 /* .formFooter {
     position: fixed;
     top: 765px;
