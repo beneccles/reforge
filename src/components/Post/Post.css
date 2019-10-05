@@ -51,6 +51,8 @@
 }
 
 .heroImage {
+    background-size: contain;
+    background-repeat: no-repeat;
     border: 1px solid orange;
     width: 95%;
     height: 70%;
