@@ -99,6 +99,14 @@
     transform: rotate(-45deg)
 }
 
+.postHeader {
+    font-family: 'Roboto', sans-serif;
+}
+
+.postFooter {
+    font-family: 'Roboto', sans-serif;
+}
+
 /* .formFooter {
     position: fixed;
     top: 765px;

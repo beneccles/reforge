@@ -8,11 +8,14 @@ class Post extends Component {
         post: {}
     }
 
+    componentDidMount(){
+        this.singlePost()
+    }
+
     singlePost = async () => {
         const { postId } = this.props.match.params;
         const res = await axios.get(`/api/post?id=${postId}`)
         this.setState({ post: res.data[0] })
-        console.log(this.state.post)
     }
 
     sendSMS = () => {
