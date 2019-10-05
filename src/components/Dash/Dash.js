@@ -38,7 +38,7 @@ class Dash extends Component {
       let pModel = processor[2];
       let gpu = el.gpu.split(" ");
       let gModel = gpu[1] + gpu[2];
-
+      console.log(el.url)
       return (
         <div className="postBoxSmall" key={index}>
           <div className="postHeader">

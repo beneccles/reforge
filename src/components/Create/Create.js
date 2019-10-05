@@ -100,6 +100,7 @@ class Create extends Component {
                 primaryStorage: "",
                 secondaryStorage: ""
             }
+            this.props.history.push('/')
         }).catch((err) => {
             console.log(err)
         })
