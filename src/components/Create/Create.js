@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import swal from 'sweetalert2'
+import { v4 as randomString } from 'uuid';
+import Dropzone from 'react-dropzone';
+import { GridLoader } from 'react-spinners';
 import './Create.css'
 
 class Create extends Component {
@@ -9,17 +12,69 @@ class Create extends Component {
         super()
 
         this.state = {
+            // Post
             title: "",
-            price:"",
+            price: "",
             condition: "",
             processor: "",
             graphicsCard: "",
             primaryStorage: "",
-            secondaryStorage: ""
+            secondaryStorage: "",
+
+            //S3
+            isUploading: false,
+            url: 'http://via.placeholder.com/450x450',
         }
     }
 
-    componentDidMount(){
+    getSignedRequest = ([file]) => {
+        this.setState({ isUploading: true })
+        // Give each fileName a random string name to ensure unique file names on bucket.
+        // Append post title and userId to front, so we can call them back later.
+        const fileName = `${randomString()}-${file.name.replace(/\s/g, '-')}`;
+
+        // Let AWS know to expect a file soon:
+        axios.get('/api/signs3', {
+            params: {
+                'file-name': fileName,
+                'file-type': file.type
+            }
+        }).then(response => {
+            const { signedRequest, url } = response.data;
+            this.uploadFile(file, signedRequest, url);
+        })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    uploadFile = (file, signedRequest, url) => {
+        const options = {
+            headers: {
+                'Content-type': file.type
+            }
+        }
+
+        axios.put(signedRequest, file, options)
+            .then(response => {
+                this.setState({
+                    isUploading: false, url
+                })
+            })
+            .catch(err => {
+                this.setState({
+                    isUploading: false
+                });
+                if (err.response.status === 403) {
+                    alert(`Your request for a signed URL failed with status 403. Double check the CORS and Bucket Policies
+                ${err.stack}`)
+                } else {
+                    alert(`ERROR: ${err.status}\n ${err.stack}`)
+                }
+            })
+    }
+
+    componentDidMount() {
         if (!this.props.loggedIn) {
             this.props.history.push('/')
         }
@@ -32,7 +87,9 @@ class Create extends Component {
     }
 
     handleSubmit = () => {
-        axios.post('/api/newPost', this.state).then((res) => {
+        const { title, price, condition, processor, graphicsCard, primaryStorage, secondaryStorage, url } = this.state
+        const post = { title, price, condition, processor, graphicsCard, primaryStorage, secondaryStorage, url }
+        axios.post('/api/newPost', post).then((res) => {
             swal.fire({ type: 'success', text: res.data.message })
             this.setState = {
                 title: "",
@@ -49,6 +106,7 @@ class Create extends Component {
     }
 
     render() {
+        const { url, isUploading } = this.state
         return (
             <div className="formBody">
                 <div className="Create">
@@ -57,7 +115,7 @@ class Create extends Component {
                     </div>
                     <div className="formLeft">
                         <input id="title" value={this.state.title} type="text" placeholder="Title" onChange={(e) => this.handleChange(e, 'title')} />
-                        <select value={this.state.price} name="price" id="priceMenu" onChange={(e) => this.handleChange(e, 'processor')}>
+                        <select value={this.state.price} name="price" id="priceMenu" onChange={(e) => this.handleChange(e, 'price')}>
                             <option selected="selected">Price...</option>
                             <option value="$200">$200</option>
                             <option value="$250">$250</option>
@@ -136,7 +194,17 @@ class Create extends Component {
                             <option value='2TB HDD'>2TB HDD</option>
                         </select>
                     </div>
-
+                    <h2 id="formTitle">Upload</h2>
+                    <div id="dropZone">
+                        <Dropzone onDrop={this.getSignedRequest}>
+                            {({getRootProps, getInputProps}) => (
+                                <div {...getRootProps()}>
+                                    <input {...getInputProps()} />
+                                    Click me to upload a file!
+                                </div>
+                            )}
+                        </Dropzone>
+                    </div>
                 </div>
                 <div className="formFooter">
                     <button className="formButton" onClick={this.handleSubmit}>Submit</button>
@@ -150,7 +218,8 @@ class Create extends Component {
 
 function mapStateToProps(reduxState) {
     return {
-        loggedIn: reduxState.reducer.loggedIn
+        loggedIn: reduxState.reducer.loggedIn,
+        id: reduxState.reducer.id
     }
 }
 

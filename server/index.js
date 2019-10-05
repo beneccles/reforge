@@ -5,6 +5,8 @@ const massive = require('massive')
 const authCtrl = require('./controllers/authController')
 const postCtrl = require('./controllers/postController')
 const smsCtrl = require('./controllers/smsController')
+const s3Ctrl = require('./controllers/s3Controller')
+
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env
 
 const app = express()
@@ -29,6 +31,9 @@ app.get('/api/post', postCtrl.singlePost)
 // Twilio
 app.post('/api/sendSMS', smsCtrl.sendSMS)
 app.post('/sms',smsCtrl.recieveSMS)
+
+// S3
+app.get('/api/signs3', s3Ctrl.getS3)
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
