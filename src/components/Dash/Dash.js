@@ -31,16 +31,15 @@ class Dash extends Component {
   }
 
   renderList = () => {
-    console.log(this.props)
     const list = this.props.posts.map((el, index) => {
       let processor = el.processor.split(" ");
       let pBrand = processor[0];
       let pModel = processor[2];
       let gpu = el.gpu.split(" ");
       let gModel = gpu[1] + gpu[2];
-      console.log(el.url)
       return (
-        <div className="postBoxSmall" key={index}>
+        <Link to={`/post/${el.post_id}`} key={index}>
+        <div className="postBoxSmall" style={{ backgroundImage: `url('${el.url}')`}}>
           <div className="postHeader">
             <div className="microInfo">
               <p>{pBrand}</p>
@@ -54,6 +53,7 @@ class Dash extends Component {
                 <p>{gModel}</p>
             </div>
         </div>
+        </Link>
       )
     })
     return list
