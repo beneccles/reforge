@@ -54,5 +54,12 @@ module.exports = {
     },
     async updatePost(req, res) {
         const db = req.app.get('db')
+        const {postId, title, price, condition, url, processor, gpu, storage_prime, storage_2nd} = req.body
+        db.update_post(price, title, condition, url).then(result => {
+            res.sendStatus(200)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send({errorMessage: 'Something Went Wrong! Our Engineers have been notified.'})
+        })
     }
 }
