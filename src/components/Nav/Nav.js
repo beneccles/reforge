@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import homeImg from '../../assets/home-24px.svg'
 import power from '../../assets/power_settings_new-24px.svg'
 import post from '../../assets/post_add-24px.svg'
+import account from '../../assets/account_circle-24px.svg'
 import './Nav.css'
 
 class Nav extends Component {
@@ -38,6 +39,7 @@ class Nav extends Component {
                         <Link id="navDashTop" to="/dashboard"><img className="navImage" src={homeImg} alt="Home" /></Link>
                         <Link to="/new"><img className="navImage" src={post} alt="New Post" /></Link>
                         <Link id="logoutButton" to="/"><img className="navImage" onClick={this.logout} src={power} alt="Logout" /></Link>
+                        <Link to="/account"><img className="navImage" src={account} alt="account" /></Link>
                     </div>
                 </div>
             )

@@ -61,5 +61,16 @@ module.exports = {
             console.log(err)
             res.status(500).send({errorMessage: 'Something Went Wrong! Our Engineers have been notified.'})
         })
+    },
+    async getMyPosts(req, res) {
+        const db = req.app.get('db')
+        const {user_id} = req.session.user
+        const posts = await db.my_posts(user_id)
+
+        if (posts) {
+            res.status(200).send(posts)
+        } else {
+            res.sendStatus(204)
+        }
     }
 }
