@@ -41,23 +41,25 @@ class Auth extends Component {
     render() {
         return (
             <div className="authBody">
-                <div className="Auth">
-                    <div id="authLogo" className="animated bounceInDown" >
-                        {/* <img id="authImg" src={logo} alt="Helo" /> */}
+                 <div id="authLogo" className="animated bounceInDown" >
+                        <h1 id="logoTitle">REFORGED COMPUTERS</h1>
                     </div>
+                <div className="Auth">
                     <div className="authRow" id="authUser">
-                        <pre id="user">Username:</pre>
-                        <input type="text" onChange={(e) => this.handleChange(e, 'username')} placeholder="username" />
+                        <pre id="user">USERNAME:</pre>
+                        <input id="userInput" type="text" onChange={(e) => this.handleChange(e, 'username')} placeholder="username" />
                     </div>
                     <div className="authRow" id="authPassword">
-                        <pre id="password">Password:</pre>
-                        <input type="password" onChange={(e) => this.handleChange(e, 'password')} placeholder="password" />
+                        <div className="centerOnInput">
+                        <pre id="password">PASSWORD:</pre>
+                        </div>
+                        <input id="passwordInput" type="password" onChange={(e) => this.handleChange(e, 'password')} placeholder="password" />
                     </div>
                     <div id="authButtons">
-                        <button onClick={() => this.login()}>Login</button>
-                        <button onClick={() => {
+                        <button id="login" onClick={() => this.login()}>LOGIN</button>
+                        <button id="register" onClick={() => {
                             this.props.history.push('/register')
-                        }}>Register</button>
+                        }}>REGISTER</button>
                     </div>
                 </div>
             </div>

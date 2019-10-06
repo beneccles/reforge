@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Lalezar&display=swap');
 
+@font-face {
+    font-family: 'anuratiregular';
+    src: url('../../assets/anurati-regular-webfont.woff') format('woff'),
+         url('../../assets/anurati-regular-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'FMPointifax-A';
+    src: url('../../assets/FMPointifaxA/webfonts/3A4A32_0_0.eot');
+    src: url('../../assets/FMPointifaxA/webfonts/3A4A32_0_0.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/FMPointifaxA/webfonts/3A4A32_0_0.woff2') format('woff2'),
+    url('../../assets/FMPointifaxA/webfonts/3A4A32_0_0.woff') format('woff'),
+    url('../../assets/FMPointifaxA/webfonts/3A4A32_0_0.ttf') format('truetype');
+}
+
 * {
     font-family: 'Lalezar', cursive
 }
@@ -26,10 +44,16 @@
 	justify-content: center;
 	align-items: center;
     /* align-content: stretch; */
-    box-shadow: 0 14px 28px 0 rgba(0,0,0,.25),
-    0 10px 10px 0 rgba(0,0,0,.26);
+    box-shadow: 0 14px 28px 0 rgba(189, 186, 164, 0.61),
+    0 10px 10px 0 rgba(167, 160, 104, 0.26);
 }
 
+#logoTitle {
+    color: rgb(189, 186, 164);
+    font-size: 36px;
+    font-family: 'anuratiregular';
+    margin-bottom: 10px;
+}
 .authRow {
     display: flex;
 	flex-direction: row;
@@ -41,19 +65,62 @@
 
 #user {
     margin-right: 5px;
+    color: rgb(189, 186, 164);
+    font-family: 'FMPointifax-A';
+}
+
+#passwordInput {
+    background-color: rgb(189, 186, 164);
+    border-radius: 10px;
+    border: none;
+}
+
+#userInput {
+    background-color: rgb(189, 186, 164);
+    border-radius: 10px;
+    border: none;
 }
 
 #password {
     margin-right: 5px;
+    color: rgb(189, 186, 164);
+    font-family: 'FMPointifax-A';
 }
 
-#authButtons {
+.centerOnInput {
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: center;
 	align-items: center;
-	align-content: stretch;
+    align-content: stretch;
+}
+
+#authButtons {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+    align-content: stretch;
+}
+
+#login {
+    color: rgb(189, 186, 164);
+    font-family: 'FMPointifax-A';
+    font-size: 20px;
+}
+
+#register {
+    color: rgb(189, 186, 164);
+    font-family: 'FMPointifax-A';
+    font-size: 20px;
+}
+
+#authPassword {
+    margin-top: 10px;
 }
 
 /* ----------- Non-Retina Screens ----------- */

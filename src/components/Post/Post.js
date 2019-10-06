@@ -63,7 +63,6 @@ class Post extends Component {
                     <div className="formLeft">
                         <button onClick={this.sendSMS}>Send Message</button>
                     </div>
-                    <button onClick={this.singlePost}>Get Post</button>
                 </div>
             </div>
         )
