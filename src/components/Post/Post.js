@@ -24,8 +24,18 @@ class Post extends Component {
         axios.post('/api/sendSMS', {name: 'Ben', message})
     }
 
+    deletePost = async () => {
+        const { postId } = this.props.match.params;
+        const { id } = this.props;
+        const {author_id} = this.state.post;
+        await axios.delete(`/api/post?postId=${postId}&author_id=${author_id}`)
+        this.props.history.push('/')
+    }
+
     render() {
         const { post } = this.state
+        const { id } = this.props;
+        const {author_id} = post;
         return (
             <div className="postBody">
                 <div className="post">
@@ -64,6 +74,7 @@ class Post extends Component {
                         <button onClick={this.sendSMS}>Send Message</button>
                     </div>
                 </div>
+                 <button onClick={this.deletePost}>Delete</button>
             </div>
         )
     }
@@ -71,7 +82,8 @@ class Post extends Component {
 
 function mapStateToProps(reduxState) {
     return {
-        posts: reduxState.listReducer.posts
+        posts: reduxState.listReducer.posts,
+        id: reduxState.reducer.id
     }
 }
 

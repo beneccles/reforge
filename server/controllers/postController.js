@@ -34,5 +34,25 @@ module.exports = {
         } else {
             res.sendStatus(204)
         }
+    },
+    async deletePost(req, res) {
+        const db = req.app.get('db')
+        const {postId, author_id} = req.query
+        console.log(req.session.user)
+        const {user_id} = req.session.user
+        // Only allow the post to be deleted if user id matches
+        // the original author id.
+        console.log(user_id, author_id)
+        if (parseInt(author_id) === user_id) {
+            const spec_id = await db.delete_post(postId)
+            await db.delete_spec(spec_id[0].spec_id)
+            console.log('deleted!')
+            res.sendStatus(200)
+        } else {
+            res.sendStatus(401)
+        }
+    },
+    async updatePost(req, res) {
+        const db = req.app.get('db')
     }
 }

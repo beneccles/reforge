@@ -27,6 +27,8 @@ app.delete('/auth/logout', authCtrl.logout)
 app.post('/api/newPost', postCtrl.createPost)
 app.get('/api/posts', postCtrl.getPosts)
 app.get('/api/post', postCtrl.singlePost)
+app.delete('/api/post', postCtrl.deletePost)
+// app.put('/api/post', postCtrl.updatePost)
 
 // Twilio
 app.post('/api/sendSMS', smsCtrl.sendSMS)
