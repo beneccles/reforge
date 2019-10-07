@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Nav />
-      <div>
+      <div className="mainBody">
       { routes }
       </div>
     </div>
