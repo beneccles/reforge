@@ -53,7 +53,7 @@ table {
     width: 100vw;
     height: 4vh;
     position: fixed;
-    background-color: #3F64A6;
+    background-color: rgb(189, 186, 164);
     box-shadow: 10px 0 20px;
     padding-top: 20px;
 	display: flex;

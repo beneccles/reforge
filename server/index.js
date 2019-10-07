@@ -7,7 +7,7 @@ const postCtrl = require('./controllers/postController')
 const smsCtrl = require('./controllers/smsController')
 const s3Ctrl = require('./controllers/s3Controller')
 
-const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env
+const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env
 
 const app = express()
 
@@ -17,6 +17,7 @@ app.use(session({
     saveUninitialized: true,
     secret: SESSION_SECRET
 }))
+
 
 // Authenticate
 app.post('/auth/register', authCtrl.register)
@@ -33,14 +34,17 @@ app.get('/api/account/posts', postCtrl.getMyPosts)
 
 // Twilio
 app.post('/api/sendSMS', smsCtrl.sendSMS)
-app.post('/sms',smsCtrl.recieveSMS)
+app.post('/sms', smsCtrl.recieveSMS)
 
 // S3
 app.get('/api/signs3', s3Ctrl.getS3)
 
+
 massive(CONNECTION_STRING).then(db => {
+    console.log('in db')
     app.set('db', db)
     app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} on station!`))
+
 }).catch((err) => {
     console.log(err)
 })

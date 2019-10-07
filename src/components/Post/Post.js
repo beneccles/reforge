@@ -48,12 +48,6 @@ class Post extends Component {
                                  <p>{post.price}</p>
                             </div>
                         </div>
-                        {/* <div className="showCase">
-                            <div id="showcase1">1</div>
-                            <div id="showcase2">2</div>
-                            <div id="showcase3">3</div>
-                            <div id="showcase4">4</div>
-                        </div> */}
                     </div>
                     <div id="postTitle" className="formLeft">
                         <h1>Specifications</h1>
