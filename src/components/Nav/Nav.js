@@ -36,10 +36,18 @@ class Nav extends Component {
                 <div className="Nav">
                     <p>{this.props.username}</p>
                     <div className="upperNav">
-                        <Link id="navDashTop" to="/dashboard"><img className="navImage" src={homeImg} alt="Home" /></Link>
+                        <div className="select">
+                            <Link id="navDashTop" to="/dashboard"><img id="home" className="navImage" src={homeImg} alt="Home" /></Link>
+                        </div>
+                        <div className="select">
                         <Link to="/new"><img className="navImage" src={post} alt="New Post" /></Link>
+                        </div>
+                        <div className="select">
                         <Link id="logoutButton" to="/"><img className="navImage" onClick={this.logout} src={power} alt="Logout" /></Link>
+                        </div>
+                        <div className="select">
                         <Link to="/account"><img className="navImage" src={account} alt="account" /></Link>
+                        </div>
                     </div>
                 </div>
             )

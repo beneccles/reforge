@@ -66,6 +66,10 @@ table {
 	border-bottom-right-radius: 10px;
 }
 
+.select:hover {
+	background-color: gray;
+}
+
 #profile {
     display: flex;
 	flex-direction: row;
@@ -76,16 +80,6 @@ table {
 	margin-top: 20px;
 
 }
-
-/* .profilePic {
-    width: 40px;
-    height: 40px;
-    background-color: #fff;
-    background-size: cover;
-    background-position: 50%;
-    border-radius: 50%;
-    box-shadow: 0 0 20px #333;
-} */
 
 .upperNav {
 	width: 100vw;
