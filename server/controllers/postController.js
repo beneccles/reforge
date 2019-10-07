@@ -58,7 +58,7 @@ module.exports = {
         try {
             const spec_id = await db.update_post(price, title, condition, url, post_id)
             await db.update_spec(processor, gpu, storage_prime, storage_2nd, 0, spec_id[0].spec_id)
-            res.status(200).send({Message: 'Post Updated!'})
+            res.status(200).send({message: 'Post Updated!'})
         }
         catch(error) {
             console.log(error)

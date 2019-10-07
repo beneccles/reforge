@@ -14,9 +14,16 @@ class Account extends Component {
             this.setState({
                 posts: result.data.map((el, index) => {
                     return (
+                        // Create the mini version of the user's post to display.
                         <div id="controlPost">
                             <h1>{el.title}</h1>
                             <p>{el.price}</p>
+                            <Link to={{
+                                pathname: '/new',
+                                state: {
+                                    post: el
+                                }
+                            }}><button>Edit</button></Link>
                             <button onClick={() => this.deletePost(el.post_id, el.author_id)}>Delete</button>
                         </div>
                     )
@@ -30,7 +37,6 @@ class Account extends Component {
         await axios.delete(`/api/post?postId=${post_id}&author_id=${author_id}`)
         this.props.history.push('/')
     }
- 
 
     render() {
 

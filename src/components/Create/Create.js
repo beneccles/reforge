@@ -21,6 +21,9 @@ class Create extends Component {
             primaryStorage: "",
             secondaryStorage: "",
 
+            //Edit Post?
+            post_id: null,
+
             //S3
             isUploading: false,
             url: 'http://via.placeholder.com/450x450',
@@ -75,6 +78,22 @@ class Create extends Component {
     }
 
     componentDidMount() {
+        // If you see a post being passed in from Account, setup for edit mode.
+        if (this.props.location.state) {
+            console.log(this.props.location.state)
+            this.setState({
+                condition: this.props.location.state.post.condition,
+                graphicsCard: this.props.location.state.post.gpu,
+                post_id: this.props.location.state.post.post_id,
+                price: this.props.location.state.post.price,
+                processor: this.props.location.state.post.processor,
+                primaryStorage: this.props.location.state.post.storage_prime,
+                secondaryStorage: this.props.location.state.post.storage_2nd,
+                title: this.props.location.state.post.title,
+                url: this.props.location.state.post.url
+            })
+        }
+
         if (!this.props.loggedIn) {
             this.props.history.push('/')
         }
@@ -104,6 +123,20 @@ class Create extends Component {
         }).catch((err) => {
             console.log(err)
         })
+    }
+
+    handleEdit = () => {
+        // axios.put('/api/post', {})
+  
+        const {title, price, condition, processor, graphicsCard, primaryStorage, secondaryStorage, url, post_id} = this.state
+        const updatedPost = {post_id, title, price, condition, url, processor, gpu: graphicsCard, storage_prime: primaryStorage, storage_2nd: secondaryStorage }
+        axios.put('/api/post', updatedPost).then((result) => {
+            swal.fire({type: 'success', text: result.data.message})
+        }).catch((err) => {
+            swal.fire({type: 'error', text: err.data.errorMessage})
+            console.log("Create, HandleEdit", err)
+        })
+
     }
 
     render() {
@@ -147,7 +180,7 @@ class Create extends Component {
                             <option value="$2000">$2000</option>
                             <option value="$2500">$2500</option>
                         </select>
-                        <input id="condition" value={this.state.conditon} type="text" placeholder="Condition" onChange={(e) => this.handleChange(e, 'condition')} />
+                        <input id="condition" value={this.state.condition} type="text" placeholder="Condition" onChange={(e) => this.handleChange(e, 'condition')} />
                     </div>
                     <h2 id="formTitle">Specifications</h2>
                     <div className="formLeft">
@@ -201,14 +234,15 @@ class Create extends Component {
                             {({getRootProps, getInputProps}) => (
                                 <div {...getRootProps()}>
                                     <input {...getInputProps()} />
-                                    Click me to upload a file!
+                                    Click me to upload a Image!
                                 </div>
                             )}
                         </Dropzone>
                     </div>
                 </div>
                 <div className="formFooter">
-                    <button className="formButton" onClick={this.handleSubmit}>Submit</button>
+                    {/* If post_id is truthy, switch to edit mode. */}
+                    {this.state.post_id ? <button className="formButton" onClick={this.handleEdit}>Save Changes</button> : <button className="formButton" onClick={this.handleSubmit}>Submit</button>}
                     <button className="formButton">Cancel</button>
                 </div>
             </div>
