@@ -119,7 +119,7 @@ class Create extends Component {
                 primaryStorage: "",
                 secondaryStorage: ""
             }
-            this.props.history.push('/')
+            this.props.history.push('/dashboard')
         }).catch((err) => {
             console.log(err)
         })
@@ -132,6 +132,7 @@ class Create extends Component {
         const updatedPost = {post_id, title, price, condition, url, processor, gpu: graphicsCard, storage_prime: primaryStorage, storage_2nd: secondaryStorage }
         axios.put('/api/post', updatedPost).then((result) => {
             swal.fire({type: 'success', text: result.data.message})
+            this.props.history.push(`/post/${post_id}`)
         }).catch((err) => {
             swal.fire({type: 'error', text: err.data.errorMessage})
             console.log("Create, HandleEdit", err)
