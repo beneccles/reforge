@@ -41,7 +41,7 @@ class Auth extends Component {
     render() {
         return (
             <div className="authBody">
-                 <div id="authLogo" className="animated bounceInDown" >
+                 <div id="authLogo" className="animated fadeInDown" >
                         <h1 id="logoTitle">REFORGED COMPUTERS</h1>
                     </div>
                 <div className="Auth">
