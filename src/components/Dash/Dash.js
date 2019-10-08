@@ -6,7 +6,7 @@ import { withRouter, Link } from 'react-router-dom'
 import {Swipeable} from 'react-touch'
 import { nextTen, postReturn } from '../../ducks/listReducer'
 import { connect } from 'react-redux'
-import Zoom from 'react-reveal/Zoom'
+import Fade from 'react-reveal/Fade'
 import './Dash.css'
 class Dash extends Component {
   constructor(props) {
@@ -38,9 +38,11 @@ class Dash extends Component {
   }
 
   getLast = () => {
-    let changeOffset = this.state.offset - 10;
-    this.setState({offset: changeOffset})
-    this.getPosts()
+    if (this.state.offset > 0) {
+      let changeOffset = this.state.offset - 10;
+      this.setState({offset: changeOffset})
+      this.getPosts()
+    }
   }
 
 
@@ -52,7 +54,7 @@ class Dash extends Component {
       let gpu = el.gpu.split(" ");
       let gModel = gpu[1] + " " + gpu[2];
       return (
-        <Zoom>
+        <Fade>
           <Swipeable onSwipeLeft={this.getNext} onSwipeRight={this.getLast}>
         <Link id="smallPost" to={`/post/${el.post_id}`} key={index}>
           <div className="postBoxSmall" style={{ backgroundImage: `url('${el.url}')` }}>
@@ -70,7 +72,7 @@ class Dash extends Component {
           </div>
         </Link>
         </Swipeable>
-        </Zoom>
+        </Fade>
       )
     })
     return list

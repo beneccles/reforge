@@ -1,0 +1,111 @@
+@font-face {
+    font-family: 'anuratiregular';
+    src: url('../../assets/anurati-regular-webfont.woff') format('woff'),
+         url('../../assets/anurati-regular-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'FMPointifax-A';
+    src: url('../../assets/FMPointifaxA/webfonts/3A4A32_0_0.eot');
+    src: url('../../assets/FMPointifaxA/webfonts/3A4A32_0_0.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/FMPointifaxA/webfonts/3A4A32_0_0.woff2') format('woff2'),
+    url('../../assets/FMPointifaxA/webfonts/3A4A32_0_0.woff') format('woff'),
+    url('../../assets/FMPointifaxA/webfonts/3A4A32_0_0.ttf') format('truetype');
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+.registerBox {
+    position: fixed;
+    top: 206px;
+    left: 100px;
+    height: 30vh;
+    width: 50vw;
+    background-color: #2F281D; 
+    opacity: 0.7;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;
+}
+
+#topOf {
+    margin-top: 5px;
+}
+
+.inputSize {
+    width: 40vw;
+}
+
+
+#registerTitle {
+    color: #C2C5D0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#registerButton {
+    color: #C2C5D0;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
+#heroImage {
+    /* background: url('../../assets/clear-computer-connection-2399840.jpg'); */
+    background: url('../../assets//cellphone-computer-keyboard-connection-912387.jpg');
+    /* background: url('../../assets/computer-keyboard-contemporary-electronics-257881.jpg'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.tagline {
+    position: fixed;
+    top: 100px;
+    right: 37.5px;
+    font-family: 'anuratiregular';
+    font-size: 30px;
+    color: #C2C5D0;
+    background-color: #2F281D; 
+}
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 800px) 
+  and (max-device-width: 2500px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+    #heroImage{
+        background-size: contain;
+    }
+
+    .tagline {
+        position: fixed;
+        top: 100px;
+        font-family: 'anuratiregular';
+        font-size: 48px;
+        color: #C2C5D0;
+        background-color: #2F281D; 
+        opacity: 0.7;
+    }
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 800px) 
+  and (max-device-width: 2500px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+    #heroImage{
+        background-size: contain;
+    }
+}
