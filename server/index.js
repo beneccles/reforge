@@ -32,9 +32,11 @@ app.delete('/api/post', postCtrl.deletePost)
 app.put('/api/post', postCtrl.updatePost)
 app.get('/api/account/posts', postCtrl.getMyPosts)
 
+// ngrok http port#
 // Twilio
 app.post('/api/sendSMS', smsCtrl.sendSMS)
 app.post('/sms', smsCtrl.recieveSMS)
+app.post('/api/call', smsCtrl.initiateCall)
 
 // S3
 app.get('/api/signs3', s3Ctrl.getS3)
