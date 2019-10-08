@@ -76,39 +76,7 @@
 	align-items: center;
 	align-content: stretch;
 }
-/* div {
-	width: 100%;
-	height: auto;
-} */
 
-@media screen
-	and (min-device-width: 320px)
-	and (max-device-width: 375px) 
-	and (-webkit-min-device-pixel-ratio: 1) {
-		.list {
-			display: grid;
-			grid-template-columns: 1fr;
-			grid-column-gap: 5px;
-		}
-
-		.postBoxSmall {
-			background-repeat: no-repeat;
-			background-size: cover;
-			height: 15vh;
-			width: 180px;
-			margin-bottom: 10px;
-			font-size: 12px;
-			display: flex;
-			flex-direction: column;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			align-items: center;
-			align-content: center;
-			box-shadow: 0 0 20px #333;
-			background-color: #F9F9F9;
-			border-radius: 5px;
-		}
-	}
 /* ----------- Non-Retina Screens ----------- */
 @media screen 
   and (min-device-width: 768px) 

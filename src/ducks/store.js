@@ -8,8 +8,7 @@ const rootReducer = combineReducers({
 })
 
 const enhancer = compose(
-    applyMiddleware(promiseMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(promiseMiddleware)
 )
 export default createStore(rootReducer, enhancer)
 
