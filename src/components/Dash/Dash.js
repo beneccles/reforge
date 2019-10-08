@@ -84,7 +84,7 @@ class Dash extends Component {
              {this.renderList()}
         </div>
         <div className="navButtons">
-          <button onClick={this.getPosts}>GET STUFF</button>
+          {/* <button onClick={this.getPosts}>GET STUFF</button> */}
           {/* I'm certain theres a better way to do this, but for now I will leave it
           as is until after I have the points requirements finished. */}
           {/* eslint-disable-next-line */}

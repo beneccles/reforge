@@ -34,7 +34,6 @@ class Nav extends Component {
         if (this.props.location.pathname !== '/' && this.props.location.pathname !== '/register') { // Only show the account control buttons if logged in. (in other words, if we are on the login screen, don't show these buttons)
             return (
                 <div className="Nav">
-                    <p>{this.props.username}</p>
                     <div className="upperNav">
                         <div className="select">
                             <Link id="navDashTop" to="/dashboard"><img id="home" className="navImage" src={homeImg} alt="Home" /></Link>

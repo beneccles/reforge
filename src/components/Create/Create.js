@@ -234,7 +234,7 @@ class Create extends Component {
                             {({getRootProps, getInputProps}) => (
                                 <div {...getRootProps()}>
                                     <input {...getInputProps()} />
-                                    Click me to upload a Image!
+                                    <button>Click me to upload a Image!</button>
                                 </div>
                             )}
                         </Dropzone>

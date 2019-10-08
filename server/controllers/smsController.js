@@ -1,4 +1,4 @@
-const {TWILIO_ACCOUNT_SECRET_ID,TWILIO_AUTH_TOKEN,TWILIO_PHONE_NUMBER, TWILIO_TEST_TOKEN, TWILIO_TEST_ID} = process.env
+const {TWILIO_ACCOUNT_SECRET_ID,TWILIO_AUTH_TOKEN,TWILIO_PHONE_NUMBER, TWILIO_TEST_TOKEN, TWILIO_TEST_ID, TWILIO_FLOW} = process.env
 
 module.exports = {
     sendSMS: (req, res) => {
@@ -38,7 +38,7 @@ module.exports = {
         const client = require('twilio')(accountSid, authToken);
         const { title, price, name, number} = req.body
 
-        client.studio.flows('FW7b33ff0af882383fd3f40701f0b1c038')
+        client.studio.flows(TWILIO_FLOW)
         .executions
         .create({to: number,
          from: TWILIO_PHONE_NUMBER,
