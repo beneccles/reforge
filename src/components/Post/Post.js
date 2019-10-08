@@ -34,15 +34,13 @@ class Post extends Component {
     }
 
     sendSMS = () => {
-        const { author_id, title, price } = this.state.post
+        const {title, price } = this.state.post
         const message = title + ' for ' + price
         axios.post('/api/sendSMS', { name: 'Ben', message })
     }
 
     render() {
         const { post } = this.state
-        const { id } = this.props;
-        const { author_id } = post;
         return (
             <div className="postBody">
                 <div className="post">

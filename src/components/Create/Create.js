@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import swal from 'sweetalert2'
 import { v4 as randomString } from 'uuid';
 import Dropzone from 'react-dropzone';
-import { GridLoader } from 'react-spinners';
 import './Create.css'
 
 class Create extends Component {
@@ -141,7 +140,6 @@ class Create extends Component {
     }
 
     render() {
-        const { url, isUploading } = this.state
         return (
             <div className="formBody">
                 <div className="Create">
