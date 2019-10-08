@@ -50,9 +50,6 @@ class Post extends Component {
                         <h1>{post.title}</h1>
                     </div>
                     <div className="postImages" style={{ backgroundImage: `url('${post.url}')` }}>
-                        <div className="postPrice">
-                            <p>{post.price}</p>
-                        </div>
                     </div>
                     <div id="postTitle" className="formLeft">
                         <h1>Specifications</h1>

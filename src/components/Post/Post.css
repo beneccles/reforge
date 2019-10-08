@@ -39,6 +39,7 @@
 }
 
 .postImages {
+    margin-left: 10px;
     width: 100%;
     height: 35%;
     display: flex;
@@ -71,6 +72,10 @@
 }
 
 .postFooter {
+    font-family: 'Roboto', sans-serif;
+}
+
+p {
     font-family: 'Roboto', sans-serif;
 }
 

@@ -31,12 +31,14 @@ class Dash extends Component {
   }
 
   getNext = () => {
-    this.setState({offset: this.state.offset += 10})
+    let changeOffset = this.state.offset + 10;
+    this.setState({offset: changeOffset})
     this.getPosts()
   }
 
   getLast = () => {
-    this.setState({offset: this.state.offset -= 10})
+    let changeOffset = this.state.offset - 10;
+    this.setState({offset: changeOffset})
     this.getPosts()
   }
 
@@ -76,7 +78,6 @@ class Dash extends Component {
   }
 
   render() {
-    const newPosts = this.getPosts;
 
     return (
       <div className="Dash">
