@@ -44,7 +44,7 @@ class Auth extends Component {
                  <div id="authLogo" className="animated fadeInDown" >
                         <h1 id="logoTitle">REFORGED COMPUTERS</h1>
                     </div>
-                <div className="Auth">
+                <div className="Auth shadow-slow">
                     <div className="authRow" id="authUser">
                         <pre id="user">USERNAME:</pre>
                         <input id="userInput" type="text" onChange={(e) => this.handleChange(e, 'username')} placeholder="username" />
