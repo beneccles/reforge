@@ -6,6 +6,7 @@ import { withRouter, Link } from 'react-router-dom'
 import {Swipeable} from 'react-touch'
 import { nextTen, postReturn } from '../../ducks/listReducer'
 import { connect } from 'react-redux'
+import Zoom from 'react-reveal/Zoom'
 import './Dash.css'
 class Dash extends Component {
   constructor(props) {
@@ -51,7 +52,8 @@ class Dash extends Component {
       let gpu = el.gpu.split(" ");
       let gModel = gpu[1] + " " + gpu[2];
       return (
-        <Swipeable onSwipeLeft={this.getNext} onSwipeRight={this.getLast}>
+        <Zoom>
+          <Swipeable onSwipeLeft={this.getNext} onSwipeRight={this.getLast}>
         <Link id="smallPost" to={`/post/${el.post_id}`} key={index}>
           <div className="postBoxSmall" style={{ backgroundImage: `url('${el.url}')` }}>
             <div className="postHeader">
@@ -68,6 +70,7 @@ class Dash extends Component {
           </div>
         </Link>
         </Swipeable>
+        </Zoom>
       )
     })
     return list
