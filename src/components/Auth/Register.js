@@ -3,10 +3,10 @@ import axios from "axios";
 import swal from "sweetalert2";
 import { withRouter } from "react-router-dom";
 import { updateUser } from "../../ducks/reducer";
-import Zoom from "react-reveal/Zoom";
 import "../../../node_modules/animate.css/animate.css";
 import "./Register.css";
-import Validate from './Validate';
+import Validate from "./Validate";
+import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
 
 class Register extends Component {
@@ -44,52 +44,49 @@ class Register extends Component {
   };
 
   checkPassword = () => {
-    let {password, password2} = this.state;
+    let { password, password2 } = this.state;
 
     if (password === password2) {
       this.setState({
         passCheck: true,
         pass2Check: true
-      })
+      });
     } else if (password2 !== password) {
       this.setState({
         passCheck: true,
         pass2Check: false
-      })
+      });
     } else {
       this.setState({
         passCheck: false,
         pass2Check: false
-      })
+      });
     }
-
-
-  }
+  };
 
   checkPhone = () => {
-    let {phone} = this.state;
+    let { phone } = this.state;
     // Check if entered phone is valid.
-    const parseNum = phone.match(/^[(]?[0-9]{3}[)]?[ ,-]?[0-9]{3}[ ,-]?[0-9]{4}$/g);
+    const parseNum = phone.match(
+      /^[(]?[0-9]{3}[)]?[ ,-]?[0-9]{3}[ ,-]?[0-9]{4}$/g
+    );
     let newPhone = "";
 
     // Convert phone into the format needed by Twilio
     if (parseNum) {
       // Give me the digits only, and add a "+1" at the top of the string.
       // This is how Twilio's API expects phone numbers: "+##########""
-      newPhone = "+1" + parseNum[0].match(/[\d]/g).join('')
+      newPhone = "+1" + parseNum[0].match(/[\d]/g).join("");
 
       // Set newPhone to state in the format expected by Twilio.
-      this.setState({phone: newPhone, phoneCheck: true})
+      this.setState({ phone: newPhone, phoneCheck: true });
     } else {
       // alert the user they need to enter a valid number.
-      this.setState({phoneCheck: false})
-      this.phone.current.value="";
+      this.setState({ phoneCheck: false });
+      this.phone.current.value = "";
       this.phone.current.focus();
     }
- 
-
-  
-  }
+  };
 
   register = () => {
     axios
@@ -107,94 +104,100 @@ class Register extends Component {
     return (
       <div className="Register">
         <div id="heroImage">
-          <Zoom left>
+          <Fade>
             <div>
               <div className="tagline">
                 <h1>REFORGED COMPUTERS</h1>
               </div>
             </div>
-          </Zoom>
-          <div className="registerBox">
-            <h1 id="registerTitle">CREATE ACCOUNT:</h1>
-            <div className="inputValidate">
-            <input
-              ref={this.user}
-              id="topOf"
-              className="inputSize"
-              type="text"
-              onChange={e => this.handleChange(e, "username")}
-              placeholder="username"
-              />
-              <Validate data={this.state.username} itemCheck={true} />
+          </Fade>
+          <Fade>
+            <div className="registerBox">
+              <h1 id="registerTitle">CREATE ACCOUNT:</h1>
+              <div className="inputValidate">
+                <input
+                  ref={this.user}
+                  id="topOf"
+                  className="inputSize"
+                  type="text"
+                  onChange={e => this.handleChange(e, "username")}
+                  placeholder="username"
+                />
+                <Validate data={this.state.username} itemCheck={true} />
               </div>
               <div className="inputValidate">
-            <input
-              ref={this.first}
-              className="inputSize"
-              type="text"
-              onChange={e => this.handleChange(e, "firstName")}
-              placeholder="First Name"
-              />
-              <Validate data={this.state.firstName} itemCheck={true} />
-              </div>
-            <div className="inputValidate">
-            <input
-              ref={this.last}
-              className="inputSize"
-              type="text"
-              onChange={e => this.handleChange(e, "lastName")}
-              placeholder="Last Name"
-              />
-              <Validate data={this.state.lastName} itemCheck={true}/>
-              </div>
-            <div className="inputValidate">
-            <input
-              ref={this.phone}
-              className="inputSize"
-              type="text"
-              onChange={e => this.handleChange(e, "phone")}
-              placeholder="Phone"
-              />
-            <Validate data={this.state.phone} itemCheck={this.state.phoneCheck}/>
+                <input
+                  ref={this.first}
+                  className="inputSize"
+                  type="text"
+                  onChange={e => this.handleChange(e, "firstName")}
+                  placeholder="First Name"
+                />
+                <Validate data={this.state.firstName} itemCheck={true} />
               </div>
               <div className="inputValidate">
-            <input
-              ref={this.email}
-              className="inputSize"
-              type="text"
-              onChange={e => this.handleChange(e, "email")}
-              placeholder="Email"
-            />
-            <Validate data={this.state.email} itemCheck={true}/>
+                <input
+                  ref={this.last}
+                  className="inputSize"
+                  type="text"
+                  onChange={e => this.handleChange(e, "lastName")}
+                  placeholder="Last Name"
+                />
+                <Validate data={this.state.lastName} itemCheck={true} />
+              </div>
+              <div className="inputValidate">
+                <input
+                  ref={this.phone}
+                  className="inputSize"
+                  type="text"
+                  onChange={e => this.handleChange(e, "phone")}
+                  placeholder="Phone"
+                />
+                <Validate
+                  data={this.state.phone}
+                  itemCheck={this.state.phoneCheck}
+                />
+              </div>
+              <div className="inputValidate">
+                <input
+                  ref={this.email}
+                  className="inputSize"
+                  type="text"
+                  onChange={e => this.handleChange(e, "email")}
+                  placeholder="Email"
+                />
+                <Validate data={this.state.email} itemCheck={true} />
+              </div>
+              <div className="inputValidate">
+                <input
+                  ref={this.pass}
+                  className="inputSize"
+                  type="text"
+                  onChange={e => {
+                    this.handleChange(e, "password");
+                  }}
+                  placeholder="Password"
+                />
+                <Validate data={this.state.password} itemCheck={true} />
+              </div>
+              <div className="inputValidate">
+                <input
+                  ref={this.pass2}
+                  className="inputSize"
+                  type="text"
+                  onChange={e => {
+                    this.handleChange(e, "password2");
+                  }}
+                  placeholder="Re-enter Password"
+                />
+                <Validate data={this.state.password2} itemCheck={true} />
+              </div>
+              <button id="registerButton" onClick={() => this.register()}>
+                REGISTER
+              </button>
             </div>
-            <div className="inputValidate">
-            <input
-              ref={this.pass}
-              className="inputSize"
-              type="text"
-              onChange={e => {
-                this.handleChange(e, "password")
-              }}
-              placeholder="Password"
-              />
-              <Validate data={this.state.password} itemCheck={true} />
-              </div>
-              <div className="inputValidate">
-            <input
-              ref={this.pass2}
-              className="inputSize"
-              type="text"
-              onChange={e => {
-                this.handleChange(e, "password2")
-              }}
-              placeholder="Re-enter Password"
-              />
-              <Validate data={this.state.password2} itemCheck={true} />
-              </div>
-            <button id="registerButton" onClick={() => this.register()}>REGISTER</button>
-          </div>
+          </Fade>
         </div>
-
       </div>
     );
   }
