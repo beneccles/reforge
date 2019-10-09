@@ -149,7 +149,7 @@ class Create extends Component {
                     <div className="formLeft">
                         <input id="title" value={this.state.title} type="text" placeholder="Title" onChange={(e) => this.handleChange(e, 'title')} />
                         <select value={this.state.price} name="price" id="priceMenu" onChange={(e) => this.handleChange(e, 'price')}>
-                            <option selected="selected">Price...</option>
+                            <option defaultValue="selected">Price...</option>
                             <option value="$200">$200</option>
                             <option value="$250">$250</option>
                             <option value="$300">$300</option>
@@ -184,7 +184,7 @@ class Create extends Component {
                     <h2 id="formTitle">Specifications</h2>
                     <div className="formLeft">
                         <select value={this.state.processor} name="Processor" id="processorMenu" onChange={(e) => this.handleChange(e, 'processor')}>
-                            <option selected="selected">Processor...</option>
+                            <option defaultValue="selected">Processor...</option>
                             <option value="Intel Core i9-9900K">Intel Core i9-9900K</option>
                             <option value="Intel Core i7-9700K">Intel Core i7-9700K</option>
                             <option value="Intel Core i7-8700K">Intel Core i7-8700K</option>
@@ -195,7 +195,7 @@ class Create extends Component {
                             <option value="AMD Ryzen 7 1700X">AMD Ryzen 7 1700X</option>
                         </select>
                         <select value={this.state.graphicsCard} name="Graphics Card" id="graphicsMenu" onChange={(e) => this.handleChange(e, 'graphicsCard')}>
-                            <option selected="selected">Graphics Card...</option>
+                            <option defaultValue="selected">Graphics Card...</option>
                             <option value="Nvidia RTX 2080TI">Nvidia RTX 2080TI</option>
                             <option value="Nvidia RTX 2080">Nvidia RTX 2080</option>
                             <option value="Nvidia RTX 2070TI">Nvidia RTX 2070TI</option>
@@ -207,7 +207,7 @@ class Create extends Component {
                             <option value="AMD Radeon RX 5700 XT">AMD Radeon RX-5700-XT</option>
                         </select>
                         <select value={this.state.primaryStorage} name="Prime Storage" id="primaryStorage" onChange={(e) => this.handleChange(e, 'primaryStorage')}>
-                            <option selected='selected'>Primary Storage...</option>
+                            <option defaultValue='selected'>Primary Storage...</option>
                             <option value='256GB SSD'>256GB SSD</option>
                             <option value='500GB SSD'>500GB SSD</option>
                             <option value='1TB SSD'>1TB SSD</option>
@@ -217,7 +217,7 @@ class Create extends Component {
                             <option value='2TB HDD'>2TB HDD</option>
                         </select>
                         <select value={this.state.secondaryStorage} name="Secondary Storage" id="secondaryStorage" onChange={(e) => this.handleChange(e, 'secondaryStorage')}>
-                            <option selected='selected'>Primary Storage...</option>
+                            <option defaultValue='selected'>Primary Storage...</option>
                             <option value='256GB SSD'>256GB SSD</option>
                             <option value='500GB SSD'>500GB SSD</option>
                             <option value='1TB SSD'>1TB SSD</option>

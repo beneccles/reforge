@@ -23,16 +23,16 @@ class Auth extends Component {
         })
     }
 
-
     login = async () => {
-        const res = await axios.post('/auth/login', this.state)
-        console.log("Res", res.data.user)
-        if (res.data.user) {
-            const { userId: id, profile_pic: profile, username } = res.data.user
-            const user = { id, profile, username, loggedIn: true }
-            this.props.updateUser(user)
-            this.props.history.push('/dashboard')
-            swal.fire({ type: 'success', text: res.data.message })
+        if (this.state.username && this.state.password) {
+            const res = await axios.post('/auth/login', this.state)
+            if (res.data.user) {
+                const { userId: id, profile_pic: profile, username } = res.data.user
+                const user = { id, profile, username, loggedIn: true }
+                this.props.updateUser(user)
+                this.props.history.push('/dashboard')
+                swal.fire({ type: 'success', text: res.data.message })
+            }
         }
     }
 

@@ -63,7 +63,6 @@ class Dash extends Component {
                   <p>{pBrand}</p>
                   <p>{pModel}</p>
                 </div>
-
             </div>
             <div className="postFooter">
               <p>{el.price}</p>
