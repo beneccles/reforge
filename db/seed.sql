@@ -9,7 +9,7 @@ CREATE TABLE users (
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     email VARCHAR(50),
-    phone VARCHAR(10),
+    phone VARCHAR(12),
     profile_pic text
 );
 
