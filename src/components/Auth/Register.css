@@ -79,6 +79,15 @@
     background-color: #2F281D; 
 }
 
+.inputValidate {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
+
 /* ----------- Non-Retina Screens ----------- */
 @media screen 
   and (min-device-width: 800px) 
