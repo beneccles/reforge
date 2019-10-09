@@ -36,7 +36,7 @@ class Nav extends Component {
                 <div className="Nav">
                     <div className="upperNav">
                         <div className="select">
-                            <Link id="navDashTop" to="/dashboard"><img id="home" className="navImage" src={homeImg} alt="Home" /></Link>
+                        <Link id="navDashTop" to="/dashboard"><img id="home" className="navImage select" src={homeImg} alt="Home" /></Link>
                         </div>
                         <div className="select">
                         <Link to="/new"><img className="navImage" src={post} alt="New Post" /></Link>

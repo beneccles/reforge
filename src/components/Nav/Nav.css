@@ -67,10 +67,6 @@ table {
 	z-index: 500;
 }
 
-.select:hover {
-	background-color: gray;
-}
-
 #profile {
     display: flex;
 	flex-direction: row;
@@ -116,6 +112,9 @@ div {
     display: block;
 }
 
+.select:hover {
+	filter: invert(0.5) sepia(1) hue-rotate(200deg);
+}
 
 /* ----------- Non-Retina Screens ----------- */
 @media screen 

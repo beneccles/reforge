@@ -42,7 +42,7 @@ class Auth extends Component {
         return (
             <div className="authBody">
                  <div id="authLogo" className="animated fadeInDown" >
-                        <h1 id="logoTitle">REFORGED COMPUTERS</h1>
+                        <h1 id="logoTitle">REFORGED MACHINES</h1>
                     </div>
                 <div className="Auth shadow-slow">
                     <div className="authRow" id="authUser">
