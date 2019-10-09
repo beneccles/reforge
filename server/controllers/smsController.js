@@ -50,12 +50,17 @@ module.exports = {
     verifyNumber: (req, res) => {
         const accountSid = TWILIO_ACCOUNT_SECRET_ID;
         const authToken = TWILIO_AUTH_TOKEN;
+        const {phone} = req.body;
+        console.log(phone)
         const client = require('twilio')(accountSid, authToken);
         // Call the Verify service I already setup on Twilio Console
         client.verify.services('VA5487c93b0134308b6d5e45ef54b621ca')
-        .verificationChecks
-        .create({to: '+phoneNumber', code: 'userProvidedCode'})
-        .then(verification_check => console.log(verification_check.status));
+        .verifications
+        .create({
+            to: phone,
+            channel: 'sms'
+        })
+        .then(verification => console.log(verification.sid));
 
         // TOKEN -> Response
         // If user's response was CORRECT, status will show as APPROVED

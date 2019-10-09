@@ -22,7 +22,10 @@ class Register extends Component {
       password2: "",
 
       // Validation Checks
-      phoneCheck: false
+      userCheck: false,
+      phoneCheck: false,
+      passCheck: false,
+      pass2Check: false
     };
 
     this.user = React.createRef();
@@ -39,6 +42,29 @@ class Register extends Component {
       [key]: e.target.value //Similar to ${}. Targets the passed in key specifically.
     });
   };
+
+  checkPassword = () => {
+    let {password, password2} = this.state;
+
+    if (password === password2) {
+      this.setState({
+        passCheck: true,
+        pass2Check: true
+      })
+    } else if (password2 !== password) {
+      this.setState({
+        passCheck: true,
+        pass2Check: false
+      })
+    } else {
+      this.setState({
+        passCheck: false,
+        pass2Check: false
+      })
+    }
+
+
+  }
 
   checkPhone = () => {
     let {phone} = this.state;
@@ -90,6 +116,7 @@ class Register extends Component {
           </Zoom>
           <div className="registerBox">
             <h1 id="registerTitle">CREATE ACCOUNT:</h1>
+            <div className="inputValidate">
             <input
               ref={this.user}
               id="topOf"
@@ -97,21 +124,29 @@ class Register extends Component {
               type="text"
               onChange={e => this.handleChange(e, "username")}
               placeholder="username"
-            />
+              />
+              <Validate data={this.state.username} itemCheck={true} />
+              </div>
+              <div className="inputValidate">
             <input
               ref={this.first}
               className="inputSize"
               type="text"
               onChange={e => this.handleChange(e, "firstName")}
               placeholder="First Name"
-            />
+              />
+              <Validate data={this.state.firstName} itemCheck={true} />
+              </div>
+            <div className="inputValidate">
             <input
               ref={this.last}
               className="inputSize"
               type="text"
               onChange={e => this.handleChange(e, "lastName")}
               placeholder="Last Name"
-            />
+              />
+              <Validate data={this.state.lastName} itemCheck={true}/>
+              </div>
             <div className="inputValidate">
             <input
               ref={this.phone}
@@ -120,8 +155,9 @@ class Register extends Component {
               onChange={e => this.handleChange(e, "phone")}
               placeholder="Phone"
               />
-            <Validate data={this.state.phone} phoneCheck={this.state.phoneCheck}/>
+            <Validate data={this.state.phone} itemCheck={this.state.phoneCheck}/>
               </div>
+              <div className="inputValidate">
             <input
               ref={this.email}
               className="inputSize"
@@ -129,24 +165,36 @@ class Register extends Component {
               onChange={e => this.handleChange(e, "email")}
               placeholder="Email"
             />
+            <Validate data={this.state.email} itemCheck={true}/>
+            </div>
+            <div className="inputValidate">
             <input
               ref={this.pass}
               className="inputSize"
               type="text"
-              onChange={e => this.handleChange(e, "password")}
+              onChange={e => {
+                this.handleChange(e, "password")
+              }}
               placeholder="Password"
-            />
+              />
+              <Validate data={this.state.password} itemCheck={true} />
+              </div>
+              <div className="inputValidate">
             <input
               ref={this.pass2}
               className="inputSize"
               type="text"
-              onChange={e => this.handleChange(e, "password2")}
+              onChange={e => {
+                this.handleChange(e, "password2")
+              }}
               placeholder="Re-enter Password"
-            />
+              />
+              <Validate data={this.state.password2} itemCheck={true} />
+              </div>
             <button id="registerButton" onClick={() => this.register()}>REGISTER</button>
-            <button onClick={() => this.checkPhone()}>VALIDATE</button>
           </div>
         </div>
+
       </div>
     );
   }

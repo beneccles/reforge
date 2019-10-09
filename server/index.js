@@ -37,6 +37,7 @@ app.get('/api/account/posts', postCtrl.getMyPosts)
 app.post('/api/sendSMS', smsCtrl.sendSMS)
 app.post('/sms', smsCtrl.recieveSMS)
 app.post('/api/call', smsCtrl.initiateCall)
+app.post('/api/verify', smsCtrl.verifyNumber)
 
 // S3
 app.get('/api/signs3', s3Ctrl.getS3)
