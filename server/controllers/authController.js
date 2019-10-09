@@ -21,7 +21,7 @@ module.exports = {
             return res.sendStatus(503)
         })
 
-        req.session.user = {username, userId: userId[0].user_id}
+        req.session.user = {username, userId: userId[0].user_id, phone}
         res.status(201).send({message: 'Logged in', user: req.session.user, loggedIn: true})
 
     },

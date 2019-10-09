@@ -54,7 +54,7 @@ class Dash extends Component {
       let gpu = el.gpu.split(" ");
       let gModel = gpu[1] + " " + gpu[2];
       return (
-        <Fade>
+        <Fade key={index}>
           <Swipeable onSwipeLeft={this.getNext} onSwipeRight={this.getLast}>
         <Link id="smallPost" to={`/post/${el.post_id}`} key={index}>
           <div className="postBoxSmall" style={{ backgroundImage: `url('${el.url}')` }}>

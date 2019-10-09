@@ -1,4 +1,4 @@
-const {TWILIO_ACCOUNT_SECRET_ID,TWILIO_AUTH_TOKEN,TWILIO_PHONE_NUMBER, TWILIO_TEST_TOKEN, TWILIO_TEST_ID, TWILIO_FLOW} = process.env
+const {TWILIO_ACCOUNT_SECRET_ID,TWILIO_AUTH_TOKEN,TWILIO_PHONE_NUMBER, TWILIO_VERIFY_SID, TWILIO_FLOW} = process.env
 
 module.exports = {
     sendSMS: (req, res) => {
@@ -54,7 +54,7 @@ module.exports = {
         console.log(phone)
         const client = require('twilio')(accountSid, authToken);
         // Call the Verify service I already setup on Twilio Console
-        client.verify.services('VA5487c93b0134308b6d5e45ef54b621ca')
+        client.verify.services(TWILIO_VERIFY_SID)
         .verifications
         .create({
             to: phone,
@@ -65,5 +65,32 @@ module.exports = {
         // TOKEN -> Response
         // If user's response was CORRECT, status will show as APPROVED
         // If INCORRECT, status will show as PENDING
+    },
+    confirmNumber: async (req, res) => {
+        const accountSid = TWILIO_ACCOUNT_SECRET_ID;
+        const authToken = TWILIO_AUTH_TOKEN;
+        const client = require('twilio')(accountSid, authToken);
+        let verificationResult;
+        const { phone, verificationCode: code} = req.body
+        const errors = { wasValidated: true };
+        console.log(phone)
+
+        try {
+            verificationResult = await client.verify.services(TWILIO_VERIFY_SID)
+            .verificationChecks
+            .create({ code, to:'+17035894200' })
+        } catch (e) {
+            console.log(e)
+            return res.status(500).send(e)
+        }
+
+        if (verificationResult.status === 'approved') {
+            res.status(200).send({message: "Phone Confirmed!"})
+        }
+
+        console.log(verificationResult.status)
+
+
+
     }
 }

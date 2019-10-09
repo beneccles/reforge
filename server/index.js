@@ -4,7 +4,7 @@ const session = require('express-session')
 const massive = require('massive')
 const authCtrl = require('./controllers/authController')
 const postCtrl = require('./controllers/postController')
-const smsCtrl = require('./controllers/smsController')
+const comCtrl = require('./controllers/smsController')
 const s3Ctrl = require('./controllers/s3Controller')
 
 const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env
@@ -34,10 +34,11 @@ app.get('/api/account/posts', postCtrl.getMyPosts)
 
 // ngrok http port#
 // Twilio
-app.post('/api/sendSMS', smsCtrl.sendSMS)
-app.post('/sms', smsCtrl.recieveSMS)
-app.post('/api/call', smsCtrl.initiateCall)
-app.post('/api/verify', smsCtrl.verifyNumber)
+app.post('/api/sendSMS', comCtrl.sendSMS)
+app.post('/sms', comCtrl.recieveSMS)
+app.post('/api/call', comCtrl.initiateCall)
+app.post('/api/verify', comCtrl.verifyNumber)
+app.post('/api/confirm', comCtrl.confirmNumber)
 
 // S3
 app.get('/api/signs3', s3Ctrl.getS3)
