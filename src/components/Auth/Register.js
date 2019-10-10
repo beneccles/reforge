@@ -43,27 +43,6 @@ class Register extends Component {
     });
   };
 
-  checkPassword = () => {
-    let { password, password2 } = this.state;
-
-    if (password === password2) {
-      this.setState({
-        passCheck: true,
-        pass2Check: true
-      });
-    } else if (password2 !== password) {
-      this.setState({
-        passCheck: true,
-        pass2Check: false
-      });
-    } else {
-      this.setState({
-        passCheck: false,
-        pass2Check: false
-      });
-    }
-  };
-
   checkPhone = () => {
     let { phone } = this.state;
     // Check if entered phone is valid.
@@ -195,6 +174,7 @@ class Register extends Component {
               <button id="registerButton" onClick={() => this.register()}>
                 REGISTER
               </button>
+              <button onClick={() => this.checkPassword()}>Verify</button>
             </div>
           </Fade>
         </div>

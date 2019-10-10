@@ -7,6 +7,7 @@ const authCtrl = require('./controllers/authController')
 const postCtrl = require('./controllers/postController')
 const comCtrl = require('./controllers/smsController')
 const s3Ctrl = require('./controllers/s3Controller')
+const sysCtrl = require('./controllers/sysController')
 
 const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env
 
@@ -44,6 +45,12 @@ app.post('/api/confirm', comCtrl.confirmNumber)
 
 // S3
 app.get('/api/signs3', s3Ctrl.getS3)
+
+// System (for grabbing system information. The idea is here is rather than the user
+// having to spend 30 minutes trying to enter their computer in for sale, they can click a button
+// and have them pull it from the machine directly. This does of course, require that you use the app on
+// the computer you want to sell.)
+app.get('/api/system/specs', sysCtrl.getSystemInfo)
 
 
 massive(CONNECTION_STRING).then(db => {
