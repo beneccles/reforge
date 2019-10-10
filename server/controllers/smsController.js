@@ -36,7 +36,7 @@ module.exports = {
         const accountSid = TWILIO_ACCOUNT_SECRET_ID;
         const authToken = TWILIO_AUTH_TOKEN;
         const client = require('twilio')(accountSid, authToken);
-        const { title, price, name, number} = req.body
+        const { title, price, name, number, author_id} = req.body
 
         client.studio.flows(TWILIO_FLOW)
         .executions

@@ -28,16 +28,16 @@ class Post extends Component {
   };
 
   sendCall = async () => {
-    const { title, price } = this.state.post;
+    const { title, price, author_id } = this.state.post;
     const { name, number } = this.state;
 
-    await axios.post("/api/call", { title, price, name, number });
+    await axios.post("/api/call", { title, price, name, number, author_id });
   };
 
   sendSMS = () => {
     const { title, price } = this.state.post;
     const message = title + " for " + price;
-    axios.post("/api/sendSMS", { name: "Ben", message });
+    axios.post("/api/sendSMS", { name: this.state.name, message });
   };
 
   render() {

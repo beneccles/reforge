@@ -107,7 +107,7 @@ class Register extends Component {
           <Fade>
             <div>
               <div className="tagline">
-                <h1>REFORGED COMPUTERS</h1>
+                <h1>REFORGED MACHINES</h1>
               </div>
             </div>
           </Fade>
