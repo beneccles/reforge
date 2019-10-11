@@ -1,12 +1,12 @@
 module.exports = {
     async createPost(req, res) {
         const db = req.app.get('db')
-        const { title, price, condition, processor, graphicsCard, primaryStorage, secondaryStorage, url, systemInfo} = req.body
-        const sysInfo = JSON.stringify(systemInfo)
-        
-        const {user_id} = req.session.user
-        const specId = await db.add_spec(processor, graphicsCard, primaryStorage, secondaryStorage, 0, sysInfo)
-        
+        const { title, price, condition, url, systemInfo, id} = req.body
+        const {make, model , serial, processor, sku, memory, battery, disks, graphics} = systemInfo
+        const user_id = id;
+        const specId = await db.add_spec2(make, model, serial, processor, sku, JSON.stringify(memory), JSON.stringify(battery), JSON.stringify(disks), JSON.stringify(graphics), JSON.stringify(systemInfo))
+        console.log(specId)
+
         db.add_post(price, title, specId[0].spec_id, user_id, condition, url).then(() => {
             res.status(200).send({message: 'Post Sucess!'})
         }).catch((err) => {

@@ -48,25 +48,7 @@ class Dash extends Component {
 
   renderList = () => {
     const list = this.props.posts.map((el, index) => {
-      let pBrand = "";
-      let pModel = "";
-      let gModel = "";
       const systemInfo = JSON.parse(el.systeminfo) ;
-      console.log(systemInfo)
-      if (el.processor) {
-
-        let processor = el.processor.split(" ");
-        pBrand = processor[0];
-        pModel = processor[2];
-      } else {
-        
-      }
-
-      if (el.gpu) {
-
-        let gpu = el.gpu.split(" ");
-        gModel = gpu[1] + " " + gpu[2];
-      }
       return (
         <Fade key={index}>
           <Swipeable onSwipeLeft={this.getNext} onSwipeRight={this.getLast}>
@@ -100,16 +82,6 @@ class Dash extends Component {
       <div className="Dash">
         <div className="list">
              {this.renderList()}
-        </div>
-        <div className="navButtons">
-          {/* <button onClick={this.getPosts}>GET STUFF</button> */}
-          {/* I'm certain theres a better way to do this, but for now I will leave it
-          as is until after I have the points requirements finished. */}
-          {/* eslint-disable-next-line */}
-          {/* <button onClick={() => this.setState({ offset: this.state.offset += 10 })}>Next</button>
-          {/* eslint-disable-next-line  */}
-          {/* <button onClick={() => this.setState({ offset: this.state.offset -= 10 })}>Back</button>
-          <button onClick={this.toggle}>REFRESH</button> */}
         </div>
       </div>
     )

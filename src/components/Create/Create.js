@@ -118,8 +118,9 @@ class Create extends Component {
     const {
       title, price, condition, url, systemInfo
     } = this.state;
+    const {id} = this.props
     const post = {
-      title, price, condition, url, systemInfo
+      title, price, condition, url, systemInfo, id
     };
     axios.post("/api/newPost", post)
       .then(res => {
