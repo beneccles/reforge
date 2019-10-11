@@ -10,7 +10,7 @@
 }
 
 .post {
-    height: 80vh;
+    height: 140vh;
     width: 87vw;
     margin-top: 6vh;
     box-shadow: 0 0 20px #333;
@@ -41,6 +41,7 @@
 .postImages {
     width: 100%;
     height: 35%;
+    margin-left: 10px;
     display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -100,7 +101,28 @@ p {
         background-size: contain;
         background-repeat: no-repeat;
     }
-   
+
+    .post {
+        height: 110vh;
+        width: 87vw;
+        margin-top: 6vh;
+        box-shadow: 0 0 20px #333;
+        background-color: #F9F9F9
+        
+    }
+
+    .postImages {
+        width: 100%;
+        height: 35%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
 }
 
 /* ----------- Retina Screens ----------- */
@@ -111,6 +133,28 @@ p {
   and (min-resolution: 192dpi) { 
 	.postImages {
         margin-left: 10px;
+        width: 100%;
+        height: 35%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .post {
+        height: 110vh;
+        width: 87vw;
+        margin-top: 6vh;
+        box-shadow: 0 0 20px #333;
+        background-color: #F9F9F9
+        
+    }
+
+    .postImages {
         width: 100%;
         height: 35%;
         display: flex;

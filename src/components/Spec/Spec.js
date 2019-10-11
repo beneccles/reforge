@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import './Spec.css';
 
 class Spec extends Component {
   formatMemory = () => {
     const memory = this.props.systemInfo.memory.map((el, index) => {
       return (
         <div key={index}>
-          <p>{`Slot ${index}: ${el.manufacturer} ${el.size} GB ${el.type} ${el.clockSpeed}`}</p>
+          <p className="formLeft">{`Slot ${index}: ${el.manufacturer} ${el.size} GB ${el.type} ${el.clockSpeed}`}</p>
         </div>
       );
     });
@@ -16,7 +17,7 @@ class Spec extends Component {
     const disks = this.props.systemInfo.disks.map((el, index) => {
       return (
         <div key={index}>
-          <p>{`Disk ${index}: ${el.type} ${el.name} ${el.size} GB`}</p>
+          <p className="formLeft">{`Disk ${index}: ${el.type} ${el.name} ${el.size} GB`}</p>
         </div>
       );
     });
@@ -27,7 +28,7 @@ class Spec extends Component {
     const graphics = this.props.systemInfo.graphics.map((el, index) => {
       return (
         <div key={index}>
-          <p>{`GPU ${index}: ${el.vendor} ${el.model} ${el.vram} GB`}</p>
+          <p className="formLeft">{`GPU ${index}: ${el.vendor} ${el.model} ${el.vram} GB`}</p>
         </div>
       );
     });
@@ -36,26 +37,26 @@ class Spec extends Component {
 
   render() {
     return (
-      <div>
-        <p>{this.props.systemInfo.make}</p>
-        <p>{this.props.systemInfo.model}</p>
-        <p>{this.props.systemInfo.serial}</p>
+      <div >
+        <p className="formLeft">{`Manufacturer: ${this.props.systemInfo.make}`}</p>
+        <p className="formLeft">{`Model: ${this.props.systemInfo.model}`}</p>
+        <p className="formLeft">{`Serial Number: ${this.props.systemInfo.serial}`}</p>
 
         <h4 id="formTitle">Processor</h4>
         {this.props.systemInfo.processor && (
           <div>
-            <p>{`${this.props.systemInfo.processor.make} ${this.props.systemInfo.processor.model}`}</p>
+            <p className="formLeft">{`${this.props.systemInfo.processor.make} ${this.props.systemInfo.processor.model}`}</p>
           </div>
         )}
         <h4 id="formTitle">Memory</h4>
         {this.props.systemInfo.memory && (
-          <p>{`Slots: ${this.props.systemInfo.memory.length}`}</p>
+          <p className="formLeft">{`Slots: ${this.props.systemInfo.memory.length}`}</p>
         )}
         {this.props.systemInfo.memory && this.formatMemory()}
         {this.props.systemInfo.battery && (
           <div>
             <h4 id="formTitle">Battery</h4>
-            <p>{`Battery: ${this.props.systemInfo.battery.type} ${this.props.systemInfo.battery.max} ${this.props.systemInfo.battery.model}`}</p>
+            <p className="formLeft">{`Battery: ${this.props.systemInfo.battery.type} ${this.props.systemInfo.battery.max} ${this.props.systemInfo.battery.model}`}</p>
           </div>
         )}
         <h4 id="formTitle">Storage</h4>

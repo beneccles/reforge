@@ -9,7 +9,8 @@ class Post extends Component {
   state = {
     post: {},
     name: "",
-    number: ""
+    number: "",
+    systemInfo: null
   };
 
   componentDidMount() {
@@ -25,8 +26,8 @@ class Post extends Component {
   singlePost = async () => {
     const { postId } = this.props.match.params;
     const res = await axios.get(`/api/post?id=${postId}`);
-    this.setState({ post: res.data[0] });
-    console.log(res.data[0])
+    const sysInfo = JSON.parse(res.data[0].systeminfo)
+    this.setState({ post: res.data[0], systemInfo: sysInfo });
   };
 
   sendCall = async () => {
@@ -60,10 +61,7 @@ class Post extends Component {
             </div>
             <div className="formLeft specs">
               <strong>{`${post.condition}  -   ${post.price}`}</strong>
-              <p>{`Processor: ${post.processor}`}</p>
-              <p>{`Graphics Card: ${post.gpu}`}</p>
-              <p>{`Primary Storage: ${post.storage_prime}`}</p>
-              <p>{`Secondary Storage: ${post.storage_2nd}`}</p>
+              {this.state.systemInfo && <Spec systemInfo={this.state.systemInfo} />}
             </div>
             <div id="postTitle" className="formLeft">
               <h1>Contact Seller</h1>
