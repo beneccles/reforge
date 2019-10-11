@@ -49,11 +49,12 @@ class Dash extends Component {
   renderList = () => {
     const list = this.props.posts.map((el, index) => {
       const systemInfo = JSON.parse(el.systeminfo) ;
+
       return (
         <Fade key={index}>
           <Swipeable onSwipeLeft={this.getNext} onSwipeRight={this.getLast}>
         <Link id="smallPost" to={`/post/${el.post_id}`} key={index}>
-          <div className="postBoxSmall" style={{ backgroundImage: `url('${el.url}')` }}>
+          {el.url && <div className="postBoxSmall" style={{ backgroundImage: `url('${el.url}')` }}>
             <div className="postHeader">
                 <div className="microInfo">
                  {systemInfo && <p>{systemInfo.processor.model}</p>}
@@ -63,7 +64,7 @@ class Dash extends Component {
               <p>{el.price}</p>
               {systemInfo && <p>{systemInfo.graphics[0].model}</p>}
             </div>
-          </div>
+          </div>}
         </Link>
         </Swipeable>
         </Fade>
@@ -77,7 +78,7 @@ class Dash extends Component {
   }
 
   render() {
-
+    console.log(this.props.posts)
     return (
       <div className="Dash">
         <div className="list">

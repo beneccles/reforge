@@ -10,7 +10,10 @@ class Account extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api/account/posts').then(result => {
+        console.log(this.props)
+        const {id} = this.props;
+
+        axios.get(`/api/account/posts?id=${id}`).then(result => {
             this.setState({
                 posts: result.data.map((el, index) => {
                     return (
@@ -57,6 +60,7 @@ class Account extends Component {
 }
 
 function mapStateToProps(reduxState) {
+    console.log(reduxState)
     return {
         username: reduxState.reducer.username,
         id: reduxState.reducer.id,

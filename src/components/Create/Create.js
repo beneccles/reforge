@@ -145,7 +145,7 @@ class Create extends Component {
       title, price, condition, url, systemInfo, post_id
     } = this.state;
     const updatedPost = {
-      title, price, condition, url, systemInfo
+      title, price, condition, url, systemInfo, post_id
     };
     axios
       .put("/api/post", updatedPost)

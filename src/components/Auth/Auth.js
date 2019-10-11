@@ -28,7 +28,9 @@ class Auth extends Component {
     if (this.state.username && this.state.password) {
       const res = await axios.post("/auth/login", this.state);
       if (res.data.user) {
-        const { userId: id, profile_pic: profile, username } = res.data.user;
+        console.log(res.data.user)
+        const { user_id: id, profile_pic: profile, username } = res.data.user;
+        console.log(id)
         const user = { id, profile, username, loggedIn: true };
         this.props.updateUser(user);
         this.props.history.push("/dashboard");
