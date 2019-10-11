@@ -5,6 +5,7 @@ import swal from "sweetalert2";
 import { v4 as randomString } from "uuid";
 import Fade from "react-reveal/Fade";
 import Dropzone from "react-dropzone";
+import Spec from '../Spec/Spec';
 import "./Create.css";
 
 class Create extends Component {
@@ -16,10 +17,10 @@ class Create extends Component {
       title: "",
       price: "",
       condition: "",
-      processor: "",
-      graphicsCard: "",
-      primaryStorage: "",
-      secondaryStorage: "",
+
+      // Spec Grab
+      isPulling: false,
+      systemInfo: {},
 
       //Edit Post?
       post_id: null,
@@ -29,6 +30,13 @@ class Create extends Component {
       url: "http://via.placeholder.com/450x450"
     };
   }
+
+  grabSystemSpecs = async () => {
+    this.setState({isPulling: true})
+    const res = await axios.get('/api/system/specs')
+    this.setState({systemInfo: res.data})
+  }
+
 
   getSignedRequest = ([file]) => {
     this.setState({ isUploading: true });
@@ -87,14 +95,11 @@ class Create extends Component {
       console.log(this.props.location.state);
       this.setState({
         condition: this.props.location.state.post.condition,
-        graphicsCard: this.props.location.state.post.gpu,
         post_id: this.props.location.state.post.post_id,
         price: this.props.location.state.post.price,
-        processor: this.props.location.state.post.processor,
-        primaryStorage: this.props.location.state.post.storage_prime,
-        secondaryStorage: this.props.location.state.post.storage_2nd,
         title: this.props.location.state.post.title,
-        url: this.props.location.state.post.url
+        url: this.props.location.state.post.url,
+        systemInfo: this.props.location.state.post.systemInfo
       });
     }
 
@@ -111,37 +116,20 @@ class Create extends Component {
 
   handleSubmit = () => {
     const {
-      title,
-      price,
-      condition,
-      processor,
-      graphicsCard,
-      primaryStorage,
-      secondaryStorage,
-      url
+      title, price, condition, url, systemInfo
     } = this.state;
     const post = {
-      title,
-      price,
-      condition,
-      processor,
-      graphicsCard,
-      primaryStorage,
-      secondaryStorage,
-      url
+      title, price, condition, url, systemInfo
     };
-    axios
-      .post("/api/newPost", post)
+    axios.post("/api/newPost", post)
       .then(res => {
         swal.fire({ type: "success", text: res.data.message });
         this.setState = {
           title: "",
-          price: 0,
+          price: "",
           condition: "",
-          processor: "",
-          graphicsCard: "",
-          primaryStorage: "",
-          secondaryStorage: ""
+          url: "",
+          systemInfo: {}
         };
         this.props.history.push("/dashboard");
       })
@@ -152,28 +140,11 @@ class Create extends Component {
 
   handleEdit = () => {
     // axios.put('/api/post', {})
-
     const {
-      title,
-      price,
-      condition,
-      processor,
-      graphicsCard,
-      primaryStorage,
-      secondaryStorage,
-      url,
-      post_id
+      title, price, condition, url, systemInfo, post_id
     } = this.state;
     const updatedPost = {
-      post_id,
-      title,
-      price,
-      condition,
-      url,
-      processor,
-      gpu: graphicsCard,
-      storage_prime: primaryStorage,
-      storage_2nd: secondaryStorage
+      title, price, condition, url, systemInfo
     };
     axios
       .put("/api/post", updatedPost)
@@ -249,71 +220,11 @@ class Create extends Component {
             </div>
             <h2 id="formTitle">Specifications</h2>
             <div className="formLeft">
-              <select
-                value={this.state.processor}
-                name="Processor"
-                id="processorMenu"
-                onChange={e => this.handleChange(e, "processor")}
-              >
-                <option defaultValue="selected">Processor...</option>
-                <option value="Intel Core i9-9900K">Intel Core i9-9900K</option>
-                <option value="Intel Core i7-9700K">Intel Core i7-9700K</option>
-                <option value="Intel Core i7-8700K">Intel Core i7-8700K</option>
-                <option value="Intel Core i7-8700">Intel Core i7-8700</option>
-                <option value="Intel Core i7-5820K">Intel Core i7-5820K</option>
-                <option value="Intel Core i7-8750H">Intel Core i7-8750H</option>
-                <option value="AMD Ryzen 7 2700X">AMD Ryzen 7 2700X</option>
-                <option value="AMD Ryzen 7 1700X">AMD Ryzen 7 1700X</option>
-              </select>
-              <select
-                value={this.state.graphicsCard}
-                name="Graphics Card"
-                id="graphicsMenu"
-                onChange={e => this.handleChange(e, "graphicsCard")}
-              >
-                <option defaultValue="selected">Graphics Card...</option>
-                <option value="Nvidia RTX 2080TI">Nvidia RTX 2080TI</option>
-                <option value="Nvidia RTX 2080">Nvidia RTX 2080</option>
-                <option value="Nvidia RTX 2070TI">Nvidia RTX 2070TI</option>
-                <option value="Nvidia RTX 2070">Nvidia RTX 2070</option>
-                <option value="Nvidia GTX 1660TI">Nvidia GTX 1660TI</option>
-                <option value="Nvidia GTX 1660">Nvidia GTX 1660</option>
-                <option value="AMD Radeon VII">AMD Radeon VII</option>
-                <option value="AMD Radeon RX 5700">AMD Radeon RX-5700</option>
-                <option value="AMD Radeon RX 5700 XT">
-                  AMD Radeon RX-5700-XT
-                </option>
-              </select>
-              <select
-                value={this.state.primaryStorage}
-                name="Prime Storage"
-                id="primaryStorage"
-                onChange={e => this.handleChange(e, "primaryStorage")}
-              >
-                <option defaultValue="selected">Primary Storage...</option>
-                <option value="256GB SSD">256GB SSD</option>
-                <option value="500GB SSD">500GB SSD</option>
-                <option value="1TB SSD">1TB SSD</option>
-                <option value="2TB SSD">2TB SSD</option>
-                <option value="500GB HDD">500GB HDD</option>
-                <option value="1TB HDD">1TB HDD</option>
-                <option value="2TB HDD">2TB HDD</option>
-              </select>
-              <select
-                value={this.state.secondaryStorage}
-                name="Secondary Storage"
-                id="secondaryStorage"
-                onChange={e => this.handleChange(e, "secondaryStorage")}
-              >
-                <option defaultValue="selected">Primary Storage...</option>
-                <option value="256GB SSD">256GB SSD</option>
-                <option value="500GB SSD">500GB SSD</option>
-                <option value="1TB SSD">1TB SSD</option>
-                <option value="2TB SSD">2TB SSD</option>
-                <option value="500GB HDD">500GB HDD</option>
-                <option value="1TB HDD">1TB HDD</option>
-                <option value="2TB HDD">2TB HDD</option>
-              </select>
+              {!this.state.isPulling ? <button className="formButton" 
+              onClick={this.grabSystemSpecs}>Pull Specs</button> :
+              <div className="specs">
+                <Spec systemInfo={this.state.systemInfo} />
+              </div>}
             </div>
             <h2 id="formTitle">Upload</h2>
             <div id="dropZone">

@@ -25,7 +25,15 @@ CREATE TABLE specs (
     gpu VARCHAR(40),
     storage_prime VARCHAR(40),
     storage_2nd VARCHAR(40),
-    screen_size int
+    screen_size int,
+    make text,
+    model text,
+    serial text,
+    sku text,
+    memory text,
+    battery text,
+    disks text,
+    graphics text
 );
 
 CREATE TABLE posts (

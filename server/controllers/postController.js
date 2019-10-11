@@ -1,9 +1,11 @@
 module.exports = {
     async createPost(req, res) {
         const db = req.app.get('db')
-        const { title, price, condition, processor, graphicsCard, primaryStorage, secondaryStorage, url} = req.body
+        const { title, price, condition, processor, graphicsCard, primaryStorage, secondaryStorage, url, systemInfo} = req.body
+        const sysInfo = JSON.stringify(systemInfo)
+        
         const {user_id} = req.session.user
-        const specId = await db.add_spec(processor, graphicsCard, primaryStorage, secondaryStorage, 0)
+        const specId = await db.add_spec(processor, graphicsCard, primaryStorage, secondaryStorage, 0, sysInfo)
         
         db.add_post(price, title, specId[0].spec_id, user_id, condition, url).then(() => {
             res.status(200).send({message: 'Post Sucess!'})
@@ -53,10 +55,11 @@ module.exports = {
     },
     async updatePost(req, res) {
         const db = req.app.get('db')
-        const {post_id, title, price, condition, url, processor, gpu, storage_prime, storage_2nd} = req.body
+        const {post_id, title, price, condition, url, processor, gpu, storage_prime, storage_2nd, systemInfo} = req.body
+        const sysInfo = JSON.stringify(systemInfo)
         try {
             const spec_id = await db.update_post(price, title, condition, url, post_id)
-            await db.update_spec(processor, gpu, storage_prime, storage_2nd, 0, spec_id[0].spec_id)
+            await db.update_spec(processor, gpu, storage_prime, storage_2nd, 0, spec_id[0].spec_id, sysInfo)
             res.status(200).send({message: 'Post Updated!'})
         }
         catch(error) {

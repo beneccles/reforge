@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
+import Spec from '../Spec/Spec'
 import { connect } from "react-redux";
 import "./Post.css";
 
@@ -25,6 +26,7 @@ class Post extends Component {
     const { postId } = this.props.match.params;
     const res = await axios.get(`/api/post?id=${postId}`);
     this.setState({ post: res.data[0] });
+    console.log(res.data[0])
   };
 
   sendCall = async () => {

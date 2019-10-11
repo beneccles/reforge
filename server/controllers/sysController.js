@@ -75,12 +75,18 @@ module.exports = {
 
         si.graphics().then((data) => {
             for (let i = 0; i < data.controllers.length; i++) {
+                let vram = data.controllers[i].vram;
+                // Account if vram comes in as MB
+                if (data.controllers[i].vram > 1000) {
+                    vram = vram / 1000;
+                    vram = vram.toFixed(1);
+                }
 
                 if (data.controllers[i].model !== '')
                 systemInfo.graphics.push({
                     vendor: data.controllers[i].vendor,
                     model: data.controllers[i].model,
-                    vram: data.controllers[i].vram
+                    vram: vram
                 })
             }
             

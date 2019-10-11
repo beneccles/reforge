@@ -48,11 +48,25 @@ class Dash extends Component {
 
   renderList = () => {
     const list = this.props.posts.map((el, index) => {
-      let processor = el.processor.split(" ");
-      let pBrand = processor[0];
-      let pModel = processor[2];
-      let gpu = el.gpu.split(" ");
-      let gModel = gpu[1] + " " + gpu[2];
+      let pBrand = "";
+      let pModel = "";
+      let gModel = "";
+      const systemInfo = JSON.parse(el.systeminfo) ;
+      console.log(systemInfo)
+      if (el.processor) {
+
+        let processor = el.processor.split(" ");
+        pBrand = processor[0];
+        pModel = processor[2];
+      } else {
+        
+      }
+
+      if (el.gpu) {
+
+        let gpu = el.gpu.split(" ");
+        gModel = gpu[1] + " " + gpu[2];
+      }
       return (
         <Fade key={index}>
           <Swipeable onSwipeLeft={this.getNext} onSwipeRight={this.getLast}>
@@ -60,13 +74,12 @@ class Dash extends Component {
           <div className="postBoxSmall" style={{ backgroundImage: `url('${el.url}')` }}>
             <div className="postHeader">
                 <div className="microInfo">
-                  <p>{pBrand}</p>
-                  <p>{pModel}</p>
+                 {systemInfo && <p>{systemInfo.processor.model}</p>}
                 </div>
             </div>
             <div className="postFooter">
               <p>{el.price}</p>
-              <p>{gModel}</p>
+              {systemInfo && <p>{systemInfo.graphics[0].model}</p>}
             </div>
           </div>
         </Link>
