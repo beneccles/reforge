@@ -174,7 +174,6 @@ class Register extends Component {
               <button id="registerButton" onClick={() => this.register()}>
                 REGISTER
               </button>
-              <button onClick={() => this.checkPassword()}>Verify</button>
             </div>
           </Fade>
         </div>

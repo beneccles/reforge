@@ -1,68 +1,109 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Reforged Machines
+___
 
-## Available Scripts
+Reforged Machines is an app designed with only one purpose in mind: make buying and selling your computer easier. Want to sell that old gaming rig with a 980ti? done. Want to get some money out of that Macbook Pro that got you through college? Reforged Machines has your back.
 
-In the project directory, you can run:
+## Getting Started (Developer)
+ - To start, fork and clone this repo.
+ - Create a .env file, and make sure to add it to your gitignore file.
+ - For the .env, you will need the following:
 
-### `npm start`
+```
+SERVER_PORT=
+SESSION_SECRET=
+TWILIO_ACCOUNT_SECRET_ID=
+TWILIO_STUDIO_ID=
+TWILIO_AUTH_TOKEN=
+TWILIO_FLOW=
+TWILIO_VERIFY_SID=
+TWLIO_PHONE_NUMBER=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+S3_BUCKET=
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# ARN AWS IAM userid/bucketname
+```
+## Getting Started (Client Side)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Click register, and fill out the form to create an account:
 
-### `npm test`
+![c3f50cf8.png](./screenshots/register.png)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- The app will then return you to the main login screen to login.
 
-### `npm run build`
+![f5c675e0.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/f5c675e0.png)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## The Dashboard
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+The dashboard is the main "hub" of the app, where the computers currently listed for sale appear. Each box shows a picture of the computer, along with it's price, processor, and graphics card. To get more information about a particular computer, click on the box to load it's main post page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![5d8ac192.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/5d8ac192.png)
 
-### `npm run eject`
+## Navigation
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![6c5fbc4b.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/6c5fbc4b.png) 
+- The house icon will direct you back to the dashboard when clicked.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![2cde39c2.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/2cde39c2.png)
+- This icon will direct you to the post creation page when clicked.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![86961c75.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/86961c75.png)
+- The power icon will end the session, and logout you out of the app when clicked.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![f92ac088.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/f92ac088.png)
+- The profile icon will direct you to the account page, where you can edit or remove any posts created by your account.
 
-## Learn More
+## Create
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Create is where you can specify a title, price, specifications, and a picture for your computer. To get the specifications of your computer, click the "pull specs" button. "Pull specs" calls a server endpoint that returns your computer's specs using [systeminformation - npm](https://www.npmjs.com/package/systeminformation). Note that the information is parsed on the backend, so that we only get the information relevant to selling the computer. To upload an image for the post, just click on the button below "Upload," and specify a file. After that click submit and you are done! Your post will now appear under dashboard.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![4ff2b582.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/4ff2b582.png)
 
-### Code Splitting
+## Post
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Post is where we see the more detailed information about a computer. Here we can see who made the computer, the model of the machine, processor, ram, battery (if your computer is detected as a laptop), storage (number of disks, type, and capacity), and graphics cards (including integrated processors).
 
-### Analyzing the Bundle Size
+If you are happy with what you see, you can enter your name and phone number at the bottom of the page and click "call me." A chatbot will then call your phone and confirm the details of the computer, before connecting you with the seller to finalize the details.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+**NOTE:** Please make sure you enter your phone number in E164 format: +1##########. Otherwise, this feature will not work.
 
-### Making a Progressive Web App
+## Account
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+The Account page will display any posts created by your account, and give you the option to either edit or delete them one by one.
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## Built With
+___
+ - ....Deep breath:
+ - [React – A JavaScript library for building user interfaces](https://reactjs.org/)
+ - [S3 - AWS](https://aws.amazon.com/tools/)
+ - [Animate.css](https://daneden.github.io/animate.css/)
+ - [axios - npm](https://www.npmjs.com/package/axios)
+ - [Home \| MassiveJS](https://massivejs.org/)
+ - [React Redux · Official React bindings for Redux](https://react-redux.js.org/)
+ - [systeminformation](https://systeminformation.io/)
+ - [twilio - npm](https://www.npmjs.com/package/twilio)
+ - [uuid - npm](https://www.npmjs.com/package/uuid)
+ - [redux - npm](https://www.npmjs.com/package/redux)
+ - [react-touch - npm](https://www.npmjs.com/package/react-touch)
+ - [react-reveal - npm](https://www.npmjs.com/package/react-reveal)
+ - [react-router-dom - npm](https://www.npmjs.com/package/react-router-dom)
+ - [express - npm](https://www.npmjs.com/package/express)
+ - [express-sessions - npm](https://www.npmjs.com/package/express-sessions)
+ - [bcrypt - npm](https://www.npmjs.com/package/bcrypt)
+ - [dotenv - npm](https://www.npmjs.com/package/dotenv)
 
-### Deployment
+## Authors
+___
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+- **Ben Eccles** - v1 Prototype
 
-### `npm run build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Acknowledgments
+___
+- @kung8 for their S3 and Twilio examples.
+- My brother Court for listening as I talked through programming bugs.
+
+
+
+

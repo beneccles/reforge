@@ -40,7 +40,7 @@ class Spec extends Component {
       <div >
         <p className="formLeft">{`Manufacturer: ${this.props.systemInfo.make}`}</p>
         <p className="formLeft">{`Model: ${this.props.systemInfo.model}`}</p>
-        <p className="formLeft">{`Serial Number: ${this.props.systemInfo.serial}`}</p>
+        {/* <p className="formLeft">{`Serial Number: ${this.props.systemInfo.serial}`}</p> */}
 
         <h4 id="formTitle">Processor</h4>
         {this.props.systemInfo.processor && (
