@@ -53,6 +53,7 @@ class Create extends Component {
         }
       })
       .then(response => {
+        console.log(response.data.url)
         const { signedRequest, url } = response.data;
         this.uploadFile(file, signedRequest, url);
       })
@@ -233,7 +234,7 @@ class Create extends Component {
                 {({ getRootProps, getInputProps }) => (
                   <div {...getRootProps()}>
                     <input {...getInputProps()} />
-                    <button>Click me to upload a Image!</button>
+                    <button className="formButton">Click me to upload a Image!</button>
                   </div>
                 )}
               </Dropzone>
