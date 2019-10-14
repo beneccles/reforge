@@ -31,33 +31,26 @@ S3_BUCKET=
 
 - The app will then return you to the main login screen to login.
 
-![f5c675e0.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/f5c675e0.png)
 
 ## The Dashboard
 
 The dashboard is the main "hub" of the app, where the computers currently listed for sale appear. Each box shows a picture of the computer, along with it's price, processor, and graphics card. To get more information about a particular computer, click on the box to load it's main post page.
 
-![5d8ac192.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/5d8ac192.png)
+![5d8ac192.png](./screenshots/Dash.png)
 
 ## Navigation
 
-![6c5fbc4b.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/6c5fbc4b.png) 
+![6c5fbc4b.png](./screenshots/NavBar.png) 
 - The house icon will direct you back to the dashboard when clicked.
-
-![2cde39c2.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/2cde39c2.png)
-- This icon will direct you to the post creation page when clicked.
-
-![86961c75.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/86961c75.png)
+- This "New Document" icon will direct you to the post creation page when clicked.
 - The power icon will end the session, and logout you out of the app when clicked.
-
-![f92ac088.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/f92ac088.png)
 - The profile icon will direct you to the account page, where you can edit or remove any posts created by your account.
 
 ## Create
 
 Create is where you can specify a title, price, specifications, and a picture for your computer. To get the specifications of your computer, click the "pull specs" button. "Pull specs" calls a server endpoint that returns your computer's specs using [systeminformation - npm](https://www.npmjs.com/package/systeminformation). Note that the information is parsed on the backend, so that we only get the information relevant to selling the computer. To upload an image for the post, just click on the button below "Upload," and specify a file. After that click submit and you are done! Your post will now appear under dashboard.
 
-![4ff2b582.png](:storage/34662127-6160-4150-a51e-5a7419e81de2/4ff2b582.png)
+![4ff2b582.png](./screenshots/Create.png)
 
 ## Post
 
