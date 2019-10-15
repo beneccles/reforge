@@ -27,8 +27,10 @@ class Create extends Component {
 
       //S3
       isUploading: false,
-      url: "http://via.placeholder.com/450x450"
+      url: ""
     };
+
+    this.uploadFile = this.uploadFile.bind(this);
   }
 
   grabSystemSpecs = async () => {
@@ -62,7 +64,7 @@ class Create extends Component {
       });
   };
 
-  uploadFile = (file, signedRequest, url) => {
+  uploadFile(file, signedRequest, url){
     const options = {
       headers: {
         "Content-type": file.type
@@ -77,18 +79,17 @@ class Create extends Component {
           url
         });
       })
-      
-      // .catch((err) => {
-      //   this.setState({
-      //     isUploading: false
-      //   });
-      //   if (err.status === 403) {
-      //     alert(`Your request for a signed URL failed with status 403. Double check the CORS and Bucket Policies
-      //           ${err.stack}`);
-      //   } else {
-      //     alert(`ERROR: ${err.status}\n ${err.stack}`);
-      //   }
-      // });
+      .catch((err) => {
+        this.setState({
+          isUploading: false
+        });
+        if (err.status === 403) {
+          alert(`Your request for a signed URL failed with status 403. Double check the CORS and Bucket Policies
+                ${err.stack}`);
+        } else {
+          alert(`ERROR: ${err.status}\n ${err.stack}`);
+        }
+      });
   };
 
   componentDidMount() {
@@ -231,6 +232,8 @@ class Create extends Component {
             </div>
             <h2 id="formTitle">Upload</h2>
             <div id="dropZone">
+              {this.state.url ?<div id="previewImage" style={{ backgroundImage: `url('${this.state.url}')` }}></div>
+              :
               <Dropzone onDrop={this.getSignedRequest}>
                 {({ getRootProps, getInputProps }) => (
                   <div {...getRootProps()}>
@@ -238,7 +241,7 @@ class Create extends Component {
                     <button className="formButton">Click me to upload a Image!</button>
                   </div>
                 )}
-              </Dropzone>
+              </Dropzone>}
             </div>
           </div>
         </Fade>

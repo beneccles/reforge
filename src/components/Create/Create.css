@@ -121,6 +121,20 @@ table {
     background-color: #C2C5D0;
 }
 
+#previewImage {
+    width: 250px;
+    height: 250px;
+    margin-left: 10px;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+    align-content: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 * {
     font-family: 'Roboto', sans-serif;
 }
