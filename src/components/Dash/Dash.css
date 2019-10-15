@@ -84,15 +84,15 @@
   and (-webkit-min-device-pixel-ratio: 1) { 
 	.list {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
 		grid-column-gap: 5px;
 	}
 
 	.postBoxSmall {
 		background-repeat: no-repeat;
 		background-size: cover;
-		height: 15vh;
-		width: 17vw;
+		height: 26vh;
+		width: 20vw;
 		margin-bottom: 10px;
 		font-size: 12px;
 		display: flex;
@@ -125,8 +125,8 @@
 	.postBoxSmall {
 		background-repeat: no-repeat;
 		background-size: cover;
-		height: 15vh;
-		width: 17vw;
+		height: 25vh;
+		width: 20vw;
 		margin-bottom: 10px;
 		font-size: 12px;
 		display: flex;
