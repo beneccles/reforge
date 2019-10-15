@@ -9,8 +9,7 @@ class Account extends Component {
         posts: []
     }
 
-    componentDidMount() {
-        console.log(this.props)
+    getMyPosts = () => {
         const {id} = this.props;
 
         axios.get(`/api/account/posts?id=${id}`).then(result => {
@@ -33,12 +32,15 @@ class Account extends Component {
                 })
             })
         })
+    }
 
+    componentDidMount() {
+        this.getMyPosts()
     }
 
     deletePost = async (post_id, author_id) => {
         await axios.delete(`/api/post?postId=${post_id}&author_id=${author_id}`)
-        this.props.history.push('/')
+        this.getMyPosts();
     }
 
     render() {
