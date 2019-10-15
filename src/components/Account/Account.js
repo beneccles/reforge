@@ -19,7 +19,7 @@ class Account extends Component {
                 posts: result.data.map((el, index) => {
                     return (
                         // Create the mini version of the user's post to display.
-                        <div id="controlPost">
+                        <div id="controlPost" key={index}>
                             <h1>{el.title}</h1>
                             <p>{el.price}</p>
                             <Link to={{

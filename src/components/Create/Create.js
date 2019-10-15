@@ -77,17 +77,18 @@ class Create extends Component {
           url
         });
       })
-      .catch(err => {
-        this.setState({
-          isUploading: false
-        });
-        if (err.response.status === 403) {
-          alert(`Your request for a signed URL failed with status 403. Double check the CORS and Bucket Policies
-                ${err.stack}`);
-        } else {
-          alert(`ERROR: ${err.status}\n ${err.stack}`);
-        }
-      });
+      
+      // .catch((err) => {
+      //   this.setState({
+      //     isUploading: false
+      //   });
+      //   if (err.status === 403) {
+      //     alert(`Your request for a signed URL failed with status 403. Double check the CORS and Bucket Policies
+      //           ${err.stack}`);
+      //   } else {
+      //     alert(`ERROR: ${err.status}\n ${err.stack}`);
+      //   }
+      // });
   };
 
   componentDidMount() {

@@ -32,7 +32,7 @@ class Auth extends Component {
         const user = { id, profile, username, loggedIn: true };
         this.props.updateUser(user);
         this.props.history.push("/dashboard");
-        swal.fire({ type: "success", text: res.data.message });
+        swal.fire({ type: "success", text: res.data.message, timer: 1500, showConfirmButton: false });
       }
     }
   };
