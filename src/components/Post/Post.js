@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Fade from "react-reveal/Fade";
+import Zoom from "react-reveal/Fade";
 import Spec from '../Spec/Spec'
 import { connect } from "react-redux";
 import "./Post.css";
@@ -46,7 +46,7 @@ class Post extends Component {
   render() {
     const { post } = this.state;
     return (
-      <Fade>
+      <Zoom left>
         <div className="postBody">
           <div className="post">
             <div id="postTitle" className="formLeft">
@@ -82,7 +82,7 @@ class Post extends Component {
             </div>
           </div>
         </div>
-      </Fade>
+      </Zoom>
     );
   }
 }

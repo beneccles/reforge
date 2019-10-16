@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Fade from 'react-reveal/Fade'
+import Zoom from 'react-reveal/Fade'
 import './Account.css'
 
 class Account extends Component {
@@ -48,7 +48,7 @@ class Account extends Component {
     render() {
 
         return (
-            <Fade>
+            <Zoom left>
             <div className="Account">
                 <div className="accountBody">
                     <div className="accountDisplay">
@@ -60,7 +60,7 @@ class Account extends Component {
 
                 </div>
             </div>
-            </Fade>
+            </Zoom>
         )
     }
 }

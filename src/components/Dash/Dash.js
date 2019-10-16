@@ -51,8 +51,8 @@ class Dash extends Component {
       const systemInfo = JSON.parse(el.systeminfo) ;
 
       return (
-        <Fade key={index}>
-          <Swipeable onSwipeLeft={this.getNext} onSwipeRight={this.getLast}>
+        <Fade>
+        <Swipeable onSwipeLeft={this.getNext} onSwipeRight={this.getLast} key={index}>
         <Link id="smallPost" to={`/post/${el.post_id}`} key={index}>
           {el.url && <div className="postBoxSmall" style={{ backgroundImage: `url('${el.url}')` }}>
             <div className="postHeader">

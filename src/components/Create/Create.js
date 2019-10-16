@@ -3,7 +3,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import swal from "sweetalert2";
 import { v4 as randomString } from "uuid";
-import Fade from "react-reveal/Fade";
+import Zoom from "react-reveal/Fade";
 import Dropzone from "react-dropzone";
 import Spec from "../Spec/Spec";
 import "./Create.css";
@@ -44,8 +44,6 @@ class Create extends Component {
       isUploading: false,
       url: "",
 
-      //Dev
-      toggle: false
     };
 
     this.uploadFile = this.uploadFile.bind(this);
@@ -60,7 +58,7 @@ class Create extends Component {
     this.setState({ isPulling: true });
     const res = await axios.get("/api/system/specs");
     const result = await axios.get("/api/system/mock");
-    if (res.data.make.match('DigitalOcean')) {
+    if (!res.data.make.match('DigitalOcean')) {
       this.setState({ systemInfo: res.data });
     } else {
       // If we don't have access to the client's specs,
@@ -197,7 +195,7 @@ class Create extends Component {
   render() {
     return (
       <div className="formBody">
-        <Fade>
+        <Zoom left>
           <div className="Create">
             <div id="formTitle">
               <h1>List a Computer</h1>
@@ -295,7 +293,7 @@ class Create extends Component {
               )}
             </div>
           </div>
-        </Fade>
+        </Zoom>
         <div className="formFooter">
           {/* If post_id is truthy, switch to edit mode. */}
           {this.state.post_id ? (

@@ -5,7 +5,6 @@ module.exports = {
         const {make, model , serial, processor, sku, memory, battery, disks, graphics} = systemInfo
         const user_id = id;
         const specId = await db.add_spec2(make, model, serial, processor, sku, JSON.stringify(memory), JSON.stringify(battery), JSON.stringify(disks), JSON.stringify(graphics), JSON.stringify(systemInfo))
-        console.log(specId)
 
         db.add_post(price, title, specId[0].spec_id, user_id, condition, url).then(() => {
             res.status(200).send({message: 'Post Sucess!'})
@@ -39,11 +38,9 @@ module.exports = {
     async deletePost(req, res) {
         const db = req.app.get('db')
         const {postId, author_id} = req.query
-        console.log(req.session.user)
         const {user_id} = req.session.user
         // Only allow the post to be deleted if user id matches
         // the original author id.
-        console.log(user_id, author_id)
         if (parseInt(author_id) === user_id) {
             const spec_id = await db.delete_post(postId)
             await db.delete_spec(spec_id[0].spec_id)
