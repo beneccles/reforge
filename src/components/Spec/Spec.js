@@ -36,6 +36,7 @@ class Spec extends Component {
   };
 
   render() {
+    console.log(this.props.systemInfo.make)
     return (
       <div >
         <p className="formLeft">{`Manufacturer: ${this.props.systemInfo.make}`}</p>

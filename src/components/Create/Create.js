@@ -21,29 +21,20 @@ class Create extends Component {
       // Spec Grab
       isPulling: false,
       systemInfo: {
-        make: "Demobook Pro",
-        model: "Demo 1",
-        serial: "DEM0",
-        sku: "DEM01234",
+        make: "",
+        model: "",
+        serial: "",
+        sku: "",
         processor: {
-          make: "Intel",
-          model: "i7-9900K",
-          vendor: "Intel Certified",
-          cores: 12
+          make: "",
+          model: "",
+          vendor: "",
+          cores: null
         },
-        memory: [
-          { manufacturer: "Demo", size: "8", type: "DDR4", clockSpeed: 3200 },
-          { manufacturer: "Demo", size: "8", type: "DDR4", clockSpeed: 3200 }
-        ],
+        memory: [],
         battery: {},
-        disks: [
-          { type: "NVMe", name: "Samsung SSD", size: "500" },
-          { type: "HDD", name: "Western Digital", size: "1000" }
-        ],
-        graphics: [
-          { vendor: "Nvidia", model: "1080ti", vram: "12" },
-          { vendor: "Intel", model: "DemoIntegrate", vram: "1.5" }
-        ]
+        disks: [],
+        graphics: []
       },
 
       //Edit Post?
@@ -51,7 +42,10 @@ class Create extends Component {
 
       //S3
       isUploading: false,
-      url: ""
+      url: "",
+
+      //Dev
+      toggle: false
     };
 
     this.uploadFile = this.uploadFile.bind(this);
@@ -67,12 +61,12 @@ class Create extends Component {
     const res = await axios.get("/api/system/specs");
     const result = await axios.get("/api/system/mock");
 
-    if (res.data.make !== "DigitalOcean") {
+    if (this.state.toggle) {
       this.setState({ systemInfo: res.data });
     } else {
       // If we don't have access to the client's specs,
       // lets load up some dummy specs for the demo.
-      this.setState({ systemInfo: result.data });
+      this.setState({ systemInfo: result.data.systemInfo });
     }
   };
 
@@ -105,7 +99,6 @@ class Create extends Component {
         "Content-type": file.type
       }
     };
-
     axios
       .put(signedRequest, file, options)
       .then(response => {
@@ -139,7 +132,6 @@ class Create extends Component {
         systemInfo: this.props.location.state.post.systemInfo
       });
     }
-
     if (!this.props.loggedIn) {
       this.props.history.push("/");
     }
@@ -274,12 +266,11 @@ class Create extends Component {
                   {/* If running on the server, load the demo specs, since
                 systemInformation doesn't currently work unless we are running locally on the user's
                 computer. */}
-                  {this.state.systemInfo.make === "DigitalOcean" ? null : null}
                   {/* Load specs for review */}
+                  
                   <Spec
                     systemInfo={this.state.systemInfo}
                     handleChange={this.handleChange}
-                    handleMemory={this.handleMemory}
                   />
                 </div>
               )}
