@@ -5,7 +5,7 @@ import swal from "sweetalert2";
 import { v4 as randomString } from "uuid";
 import Fade from "react-reveal/Fade";
 import Dropzone from "react-dropzone";
-import Spec from '../Spec/Spec';
+import Spec from "../Spec/Spec";
 import "./Create.css";
 
 class Create extends Component {
@@ -26,15 +26,24 @@ class Create extends Component {
         serial: "DEM0",
         sku: "DEM01234",
         processor: {
-            make: "Intel",
-            model: "i7-9900K",
-            vendor: "Intel Certified",
-            cores: 12
+          make: "Intel",
+          model: "i7-9900K",
+          vendor: "Intel Certified",
+          cores: 12
         },
-        memory: [{manufacturer: 'Demo', size: '8', type: 'DDR4', clockSpeed: 3200}, {manufacturer: 'Demo', size: '8', type: 'DDR4', clockSpeed: 3200}],
+        memory: [
+          { manufacturer: "Demo", size: "8", type: "DDR4", clockSpeed: 3200 },
+          { manufacturer: "Demo", size: "8", type: "DDR4", clockSpeed: 3200 }
+        ],
         battery: {},
-        disks: [{type: 'NVMe', name: 'Samsung SSD', size: '500'}, {type: 'HDD', name: 'Western Digital', size: '1000'}],
-        graphics: [{vendor: 'Nvidia', model: '1080ti', vram: '12'}, {vendor: 'Intel', model: 'DemoIntegrate', vram: '1.5'}]
+        disks: [
+          { type: "NVMe", name: "Samsung SSD", size: "500" },
+          { type: "HDD", name: "Western Digital", size: "1000" }
+        ],
+        graphics: [
+          { vendor: "Nvidia", model: "1080ti", vram: "12" },
+          { vendor: "Intel", model: "DemoIntegrate", vram: "1.5" }
+        ]
       },
 
       //Edit Post?
@@ -48,19 +57,30 @@ class Create extends Component {
     this.uploadFile = this.uploadFile.bind(this);
   }
 
+  // This is really cool. I'm using a package called systemInformation
+  // to grab the user's specs directly from their machine. The user doesn't have to do anything
+  // expect click a button to initate the process. Check out /server/controllers/sysController.js
+  // if you would like to see how it works! Unfortunately, since the package uses node to grab the
+  // computer's specs, it only works if both the frontend and server are running on the same
   grabSystemSpecs = async () => {
-    this.setState({isPulling: true})
-    const res = await axios.get('/api/system/specs')
-    this.setState({systemInfo: res.data})
-  }
+    this.setState({ isPulling: true });
+    const res = await axios.get("/api/system/specs");
+    const result = await axios.get("/api/system/mock");
 
+    if (res.data.make !== "DigitalOcean") {
+      this.setState({ systemInfo: res.data });
+    } else {
+      // If we don't have access to the client's specs,
+      // lets load up some dummy specs for the demo.
+      this.setState({ systemInfo: result.data });
+    }
+  };
 
   getSignedRequest = ([file]) => {
     this.setState({ isUploading: true });
     // Give each fileName a random string name to ensure unique file names on bucket.
     // Append post title and userId to front, so we can call them back later.
     const fileName = `${randomString()}-${file.name.replace(/\s/g, "-")}`;
-
     // Let AWS know to expect a file soon:
     axios
       .get("/api/signs3", {
@@ -70,7 +90,7 @@ class Create extends Component {
         }
       })
       .then(response => {
-        console.log(response.data.url)
+        console.log(response.data.url);
         const { signedRequest, url } = response.data;
         this.uploadFile(file, signedRequest, url);
       })
@@ -79,7 +99,7 @@ class Create extends Component {
       });
   };
 
-  uploadFile(file, signedRequest, url){
+  uploadFile(file, signedRequest, url) {
     const options = {
       headers: {
         "Content-type": file.type
@@ -94,7 +114,7 @@ class Create extends Component {
           url
         });
       })
-      .catch((err) => {
+      .catch(err => {
         this.setState({
           isUploading: false
         });
@@ -105,7 +125,7 @@ class Create extends Component {
           alert(`ERROR: ${err.status}\n ${err.stack}`);
         }
       });
-  };
+  }
 
   componentDidMount() {
     // If you see a post being passed in from Account, setup for edit mode.
@@ -125,11 +145,6 @@ class Create extends Component {
     }
   }
 
-  handleMemory = (e) => {
-    let newArr = this.state.memory
-    newArr.push(e.target.value)
-  }
-
   handleChange = (e, key) => {
     this.setState({
       [key]: e.target.value
@@ -137,14 +152,18 @@ class Create extends Component {
   };
 
   handleSubmit = () => {
-    const {
-      title, price, condition, url, systemInfo
-    } = this.state;
-    const {id} = this.props
+    const { title, price, condition, url, systemInfo } = this.state;
+    const { id } = this.props;
     const post = {
-      title, price, condition, url, systemInfo, id
+      title,
+      price,
+      condition,
+      url,
+      systemInfo,
+      id
     };
-    axios.post("/api/newPost", post)
+    axios
+      .post("/api/newPost", post)
       .then(res => {
         swal.fire({ type: "success", text: res.data.message });
         this.setState = {
@@ -163,11 +182,14 @@ class Create extends Component {
 
   handleEdit = () => {
     // axios.put('/api/post', {})
-    const {
-      title, price, condition, url, systemInfo, post_id
-    } = this.state;
+    const { title, price, condition, url, systemInfo, post_id } = this.state;
     const updatedPost = {
-      title, price, condition, url, systemInfo, post_id
+      title,
+      price,
+      condition,
+      url,
+      systemInfo,
+      post_id
     };
     axios
       .put("/api/post", updatedPost)
@@ -243,47 +265,44 @@ class Create extends Component {
             </div>
             <h2 id="formTitle">Specifications</h2>
             <div className="formLeft">
-              {!this.state.isPulling ? <button className="formButton" 
-              onClick={this.grabSystemSpecs}>Pull Specs</button> :
-              <div className="specs">
-                {/* If running on the server, load the demo specs, since
+              {!this.state.isPulling ? (
+                <button className="formButton" onClick={this.grabSystemSpecs}>
+                  Pull Specs
+                </button>
+              ) : (
+                <div className="specs">
+                  {/* If running on the server, load the demo specs, since
                 systemInformation doesn't currently work unless we are running locally on the user's
                 computer. */}
-                {this.state.systemInfo.make === 'DigitalOcean' ? 
-                this.setState({systemInfo: {
-                  make: "Demobook Pro",
-                  model: "Demo 1",
-                  serial: "DEM0",
-                  sku: "DEM01234",
-                  processor: {
-                      make: "Intel",
-                      model: "i7-9900K",
-                      vendor: "Intel Certified",
-                      cores: 12
-                  },
-                  memory: [{manufacturer: 'Demo', size: '8', type: 'DDR4', clockSpeed: 3200}, {manufacturer: 'Demo', size: '8', type: 'DDR4', clockSpeed: 3200}],
-                  battery: {},
-                  disks: [{type: 'NVMe', name: 'Samsung SSD', size: '500'}, {type: 'HDD', name: 'Western Digital', size: '1000'}],
-                  graphics: [{vendor: 'Nvidia', model: '1080ti', vram: '12'}, {vendor: 'Intel', model: 'DemoIntegrate', vram: '1.5'}]
-                }}) : null
-                }
-                {/* Load specs for review */}
-                 <Spec systemInfo={this.state.systemInfo} handleChange={this.handleChange} handleMemory={this.handleMemory}/>
-
-              </div>}
+                  {this.state.systemInfo.make === "DigitalOcean" ? null : null}
+                  {/* Load specs for review */}
+                  <Spec
+                    systemInfo={this.state.systemInfo}
+                    handleChange={this.handleChange}
+                    handleMemory={this.handleMemory}
+                  />
+                </div>
+              )}
             </div>
             <h2 id="formTitle">Upload</h2>
             <div id="dropZone">
-              {this.state.url ?<div id="previewImage" style={{ backgroundImage: `url('${this.state.url}')` }}></div>
-              :
-              <Dropzone onDrop={this.getSignedRequest}>
-                {({ getRootProps, getInputProps }) => (
-                  <div {...getRootProps()}>
-                    <input {...getInputProps()} />
-                    <button className="formButton">Click me to upload a Image!</button>
-                  </div>
-                )}
-              </Dropzone>}
+              {this.state.url ? (
+                <div
+                  id="previewImage"
+                  style={{ backgroundImage: `url('${this.state.url}')` }}
+                ></div>
+              ) : (
+                <Dropzone onDrop={this.getSignedRequest}>
+                  {({ getRootProps, getInputProps }) => (
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <button className="formButton">
+                        Click me to upload a Image!
+                      </button>
+                    </div>
+                  )}
+                </Dropzone>
+              )}
             </div>
           </div>
         </Fade>
