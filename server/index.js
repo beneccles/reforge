@@ -8,6 +8,7 @@ const postCtrl = require('./controllers/postController')
 const comCtrl = require('./controllers/smsController')
 const s3Ctrl = require('./controllers/s3Controller')
 const sysCtrl = require('./controllers/sysController')
+const mockCtrl = require('./controllers/mockController')
 
 const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env
 
@@ -51,6 +52,9 @@ app.get('/api/signs3', s3Ctrl.getS3)
 // and have them pull it from the machine directly. This does of course, require that you use the app on
 // the computer you want to sell.)
 app.get('/api/system/specs', sysCtrl.getSystemInfo)
+
+// Get Mock Data when running on the web server. (SysCtrl can only grab your computer's specs if its running locally)
+app.get('/api/system/mock', mockCtrl.getMockInfo)
 
 
 massive(CONNECTION_STRING).then(db => {

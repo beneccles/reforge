@@ -20,7 +20,22 @@ class Create extends Component {
 
       // Spec Grab
       isPulling: false,
-      systemInfo: {},
+      systemInfo: {
+        make: "Demobook Pro",
+        model: "Demo 1",
+        serial: "DEM0",
+        sku: "DEM01234",
+        processor: {
+            make: "Intel",
+            model: "i7-9900K",
+            vendor: "Intel Certified",
+            cores: 12
+        },
+        memory: [{manufacturer: 'Demo', size: '8', type: 'DDR4', clockSpeed: 3200}, {manufacturer: 'Demo', size: '8', type: 'DDR4', clockSpeed: 3200}],
+        battery: {},
+        disks: [{type: 'NVMe', name: 'Samsung SSD', size: '500'}, {type: 'HDD', name: 'Western Digital', size: '1000'}],
+        graphics: [{vendor: 'Nvidia', model: '1080ti', vram: '12'}, {vendor: 'Intel', model: 'DemoIntegrate', vram: '1.5'}]
+      },
 
       //Edit Post?
       post_id: null,
@@ -95,7 +110,6 @@ class Create extends Component {
   componentDidMount() {
     // If you see a post being passed in from Account, setup for edit mode.
     if (this.props.location.state) {
-      console.log(this.props.location.state);
       this.setState({
         condition: this.props.location.state.post.condition,
         post_id: this.props.location.state.post.post_id,
@@ -109,6 +123,11 @@ class Create extends Component {
     if (!this.props.loggedIn) {
       this.props.history.push("/");
     }
+  }
+
+  handleMemory = (e) => {
+    let newArr = this.state.memory
+    newArr.push(e.target.value)
   }
 
   handleChange = (e, key) => {
@@ -227,7 +246,30 @@ class Create extends Component {
               {!this.state.isPulling ? <button className="formButton" 
               onClick={this.grabSystemSpecs}>Pull Specs</button> :
               <div className="specs">
-                <Spec systemInfo={this.state.systemInfo} />
+                {/* If running on the server, load the demo specs, since
+                systemInformation doesn't currently work unless we are running locally on the user's
+                computer. */}
+                {this.state.systemInfo.make === 'DigitalOcean' ? 
+                this.setState({systemInfo: {
+                  make: "Demobook Pro",
+                  model: "Demo 1",
+                  serial: "DEM0",
+                  sku: "DEM01234",
+                  processor: {
+                      make: "Intel",
+                      model: "i7-9900K",
+                      vendor: "Intel Certified",
+                      cores: 12
+                  },
+                  memory: [{manufacturer: 'Demo', size: '8', type: 'DDR4', clockSpeed: 3200}, {manufacturer: 'Demo', size: '8', type: 'DDR4', clockSpeed: 3200}],
+                  battery: {},
+                  disks: [{type: 'NVMe', name: 'Samsung SSD', size: '500'}, {type: 'HDD', name: 'Western Digital', size: '1000'}],
+                  graphics: [{vendor: 'Nvidia', model: '1080ti', vram: '12'}, {vendor: 'Intel', model: 'DemoIntegrate', vram: '1.5'}]
+                }}) : null
+                }
+                {/* Load specs for review */}
+                 <Spec systemInfo={this.state.systemInfo} handleChange={this.handleChange} handleMemory={this.handleMemory}/>
+
               </div>}
             </div>
             <h2 id="formTitle">Upload</h2>
