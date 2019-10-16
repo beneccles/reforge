@@ -66,7 +66,6 @@ class Account extends Component {
 }
 
 function mapStateToProps(reduxState) {
-    console.log(reduxState)
     return {
         username: reduxState.reducer.username,
         id: reduxState.reducer.id,
