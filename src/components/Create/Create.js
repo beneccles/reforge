@@ -60,8 +60,8 @@ class Create extends Component {
     this.setState({ isPulling: true });
     const res = await axios.get("/api/system/specs");
     const result = await axios.get("/api/system/mock");
-
-    if (this.state.toggle) {
+    console.log(res.data.make)
+    if (res.data.make.match('Digital Ocean')) {
       this.setState({ systemInfo: res.data });
     } else {
       // If we don't have access to the client's specs,
