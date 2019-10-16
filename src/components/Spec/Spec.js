@@ -36,33 +36,32 @@ class Spec extends Component {
   };
 
   render() {
-    console.log(this.props.systemInfo.make)
     return (
       <div >
         <p className="formLeft">{`Manufacturer: ${this.props.systemInfo.make}`}</p>
         <p className="formLeft">{`Model: ${this.props.systemInfo.model}`}</p>
         {/* <p className="formLeft">{`Serial Number: ${this.props.systemInfo.serial}`}</p> */}
 
-        <h4 id="formTitle">Processor</h4>
+        <h4 className="formTitle">Processor</h4>
         {this.props.systemInfo.processor && (
           <div>
             <p className="formLeft">{`${this.props.systemInfo.processor.make} ${this.props.systemInfo.processor.model}`}</p>
           </div>
         )}
-        <h4 id="formTitle">Memory</h4>
+        <h4 className="formTitle">Memory</h4>
         {this.props.systemInfo.memory && (
           <p className="formLeft">{`Slots: ${this.props.systemInfo.memory.length}`}</p>
         )}
         {this.props.systemInfo.memory && this.formatMemory()}
         {this.props.systemInfo.battery && (
           <div>
-            <h4 id="formTitle">Battery</h4>
+            <h4 className="formTitle">Battery</h4>
             <p className="formLeft">{`Battery: ${this.props.systemInfo.battery.type} ${this.props.systemInfo.battery.max} ${this.props.systemInfo.battery.model}`}</p>
           </div>
         )}
-        <h4 id="formTitle">Storage</h4>
+        <h4 className="formTitle">Storage</h4>
         {this.props.systemInfo.disks && this.formatDisk()}
-        <h4 id="formTitle">Graphics</h4>
+        <h4 className="formTitle">Graphics</h4>
         {this.props.systemInfo.graphics && this.formatGraphics()}
       </div>
     );

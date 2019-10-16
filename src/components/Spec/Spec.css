@@ -1,4 +1,15 @@
 .specs {
     margin-left: 0px;
-    width: 500px;
+    width: 200%;
+}
+
+.formTitle {
+    border-bottom: 1px solid #3F64A6;
+    width: 75%;
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 700px;
 }
