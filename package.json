@@ -29,7 +29,7 @@
     "redux": "^4.0.4",
     "redux-promise-middleware": "^6.1.1",
     "sweetalert2": "^8.18.0",
-    "systeminformation": "^4.14.11",
+    "systeminformation": "^5.3.1",
     "twilio": "^3.35.1",
     "uuid": "^3.3.3"
   },
